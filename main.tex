@@ -1,0 +1,143 @@
+\documentclass[a4paper,12pt]{article}
+
+% ============================================================
+%  IDIOMA E CODIFICAÇÃO
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\frenchspacing
+
+% ============================================================
+%  MATEMÁTICA E QUÍMICA
+% ============================================================
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\DeclareMathOperator{\sen}{sen}
+\numberwithin{equation}{section}
+
+% ============================================================
+%  TABELAS
+% ============================================================
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage[table]{xcolor}   % precisa vir antes do tikz/pgfplots
+\usepackage{placeins}        % \FloatBarrier
+
+% ============================================================
+%  FIGURAS E GRÁFICOS
+% ============================================================
+\usepackage{graphicx}
+\usepackage{float}           % permite [H]
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, fit, backgrounds}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{caption}
+\captionsetup{skip=8pt}
+
+% Cores usadas nos gráficos TikZ (Cap. 3)
+\definecolor{corTransporte}{HTML}{2E75B6}
+\definecolor{corBESS}{HTML}{1D9E75}
+\definecolor{corOutros}{HTML}{A6A6A6}
+\definecolor{corLinha}{HTML}{444444}
+
+% Cores usadas no capítulo da gigafábrica
+\definecolor{gigaAzul}{HTML}{2563EB}
+\definecolor{gigaLaranja}{HTML}{D97706}
+\definecolor{gigaVerde}{HTML}{16A34A}
+\definecolor{gigaRoxo}{HTML}{7C3AED}
+
+% ============================================================
+%  TEXTO, LAYOUT E DIVERSOS
+% ============================================================
+\usepackage{geometry}
+\geometry{left=2cm, right=3cm, top=3cm, bottom=2cm, headheight=40pt}
+\usepackage{enumitem}
+\usepackage{wrapfig}
+\usepackage{indentfirst}
+\usepackage{changepage}
+\usepackage{lscape}
+\usepackage{scalefnt}
+\usepackage{soul}
+\usepackage{ragged2e}
+\usepackage{times}
+\usepackage{siunitx}
+\usepackage{gensymb}
+\usepackage{courier}
+
+% ============================================================
+%  CÓDIGO MATLAB
+% ============================================================
+\usepackage{listings}
+\usepackage[numbered,framed]{matlab-prettifier}
+\lstset{
+  style              = Matlab-editor,
+  basicstyle         = \mlttfamily\small,
+  escapechar         = ",
+  mlshowsectionrules = true,
+}
+
+% ============================================================
+%  CITAÇÕES E REFERÊNCIAS
+% ============================================================
+\usepackage[round,authoryear]{natbib}
+
+% ============================================================
+%  HYPERREF (deve vir por último entre os pacotes principais)
+% ============================================================
+\usepackage[pdfusetitle,bookmarks=true,bookmarksopen=true,
+            colorlinks=false,hidelinks]{hyperref}
+
+\usepackage{lipsum}
+
+% ============================================================
+%  CABEÇALHO E RODAPÉ
+% ============================================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1cm]{Logo/logo_unicamp.png}}
+\fancyhead[C]{\small EM506 A - Mecanismos e Dinâmica das Máquinas}
+\fancyhead[R]{\includegraphics[height=1cm]{Logo/Logo_FEM.png}}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[C]{\thepage}
+
+% Nomenclatura em português
+\addto\captionsbrazilian{\renewcommand{\tablename}{Tabela}}
+
+% ============================================================
+%  ESPAÇAMENTO
+% ============================================================
+\setlength{\parindent}{1.3cm}
+\setlength{\parskip}{0.2cm}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{6pt}
+\setlength{\LTpre}{6pt}
+\setlength{\LTpost}{12pt}
+
+% ---------- Macro para fonte de tabelas/figuras ----------
+\newcommand{\fonte}[1]{\par\vspace{3pt}{\footnotesize Fonte: #1}}
+
+% ============================================================
+\begin{document}
+\selectlanguage{brazilian}
+
+% ----------------- PRÉ-TEXTUAIS -----------------
+\input{capa}
+
+% ----------------- TEXTUAIS -----------------
+\input{chapters/1.Intro}
+\input{chapters/2.Metodologia}
+\input{chapters/3.Revisao_Bibliografica_Contexto_Tecnologico}
+\input{chapters/4.Resultados}
+\input{chapters/5.MFA_Gigafabrica}
+\input{chapters/6.Conclusao}
+\input{chapters/7.Anexos}
+\input{chapters/8.Referencias}
+
+\end{document}

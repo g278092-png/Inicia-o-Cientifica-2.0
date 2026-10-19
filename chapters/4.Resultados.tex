@@ -1,0 +1,397 @@
+\newpage
+\section{Resultados}
+\label{sec:resultados}
+
+% ===========================================================
+\subsection{Market Share de Químicas de Baterias}
+\label{sec:marketshare}
+% ===========================================================
+
+Determinar a participação de mercado (\textit{market share}) das diferentes
+químicas de baterias atualmente em circulação no Brasil é uma etapa fundamental
+para embasar a análise do fluxo de materiais proposta por esta pesquisa. Para isso,
+o levantamento baseou-se no cruzamento de dados de emplacamentos de veículos
+eletrificados, fornecidos pela Associação Brasileira do Veículo Elétrico (ABVE),
+com as especificações técnicas detalhadas no Programa Brasileiro de Etiquetagem
+Veicular (PBEV), conforme descrito na Seção~\ref{sec:met-marketshare}.
+
+A partir da consolidação desses dados, que englobou uma amostra representativa de
+mais de 509~mil veículos eletrificados, foi possível estimar a proporção de cada
+tecnologia de bateria presente na frota nacional. Os resultados revelam uma
+configuração de mercado particular, moldada pela predominância de modelos de
+entrada e híbridos.
+
+A química de Lítio-Ferro-Fosfato (LFP) representa \textbf{48,12\%} do volume total
+de veículos analisados. Esse domínio reflete a forte penetração de montadoras
+asiáticas no Brasil, que priorizam o LFP para reduzir o custo final ao consumidor e
+viabilizar a comercialização de veículos elétricos e híbridos \textit{plug-in}.
+
+Em segundo lugar, as baterias baseadas em Níquel-Manganês-Cobalto (NMC) respondem
+por \textbf{32,75\%} da frota. Sua aplicação encontra-se concentrada,
+majoritariamente, em veículos que demandam maior densidade energética, como modelos
+de alta performance e híbridos \textit{plug-in} de categorias superiores.
+
+Destaca-se também a expressiva participação das baterias de Níquel-Metal Hidreto
+(NiMH), que compõem \textbf{18,38\%} do mercado nacional. Esse volume é sustentado
+quase que exclusivamente pela consolidação dos veículos híbridos \textit{flex}
+(HEV) de marcas tradicionais. Tecnologias minoritárias — NCMA (0,52\%), LMO/NMC
+(0,15\%) e variações de íon-lítio ainda em confirmação (0,08\%) — somam juntas menos
+de 1\% do total, conforme sintetizado na Tabela~\ref{tab:marketshare-sintese} e
+ilustrado na Figura~\ref{fig:marketshare}.
+
+\begin{table}[H]
+\centering
+\caption{Síntese do \textit{market share} por química de bateria na frota
+         eletrificada brasileira.}
+\label{tab:marketshare-sintese}
+\begin{tabular}{lc}
+\toprule
+\textbf{Química da Bateria} & \textbf{Market Share} \\
+\midrule
+LFP (Lítio-Ferro-Fosfato)                          & 48,12\% \\
+NMC (Níquel-Manganês-Cobalto)                      & 32,75\% \\
+NiMH (Níquel-Metal Hidreto)                        & 18,38\% \\
+NCMA (Níquel-Cobalto-Manganês-Alumínio)            &  0,52\% \\
+LMO/NMC (Óxido de Manganês / Níquel-Mang.-Cobalto) &  0,15\% \\
+Lítio-Íon (a confirmar)                            &  0,08\% \\
+\bottomrule
+\end{tabular}
+\fonte{elaborada com base em ABVE (BI Geral) e PBEV.}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figuras/market_share_quimicas.png}
+    \caption{Participação de mercado das químicas de bateria na frota eletrificada
+             brasileira.}
+    \label{fig:marketshare}
+    \fonte{elaborada com base em ABVE (BI Geral) e PBEV.}
+\end{figure}
+
+Este panorama estabelece a linha de base para a projeção do fluxo de materiais da
+frota eletrificada. A predominância absoluta de químicas isentas de cobalto e
+níquel (como o LFP) na maior parcela dos novos veículos indica que o futuro
+brasileiro terá uma concentração massiva de ferro, fósforo e lítio, reforçando a
+premissa de que os desafios econômicos da reciclagem no Brasil exigirão processos
+eficientes, focados em ganho de escala.
+
+\subsubsection{Base de Dados de Emplacamentos}
+\label{subsec:emplacamentos}
+
+A Tabela~\ref{tab:emplacamentos-geral} apresenta os 15 modelos eletrificados de
+maior volume de vendas (todas as categorias combinadas), com a respectiva química
+de bateria atribuída a cada um, dentro da amostra consolidada nesta pesquisa.
+
+\begin{table}[H]
+\centering
+\caption{Modelos eletrificados de maior volume de emplacamento (geral) e química
+         de bateria associada.}
+\label{tab:emplacamentos-geral}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Modelo} & \textbf{Quantidade} & \textbf{Market Share} & \textbf{Química} \\
+\midrule
+Toyota Corolla Cross XRX Hybrid & 51.551 & 8,69\% & NiMH \\
+BYD Dolphin Mini GS5 EV         & 44.730 & 7,54\% & LFP \\
+BYD Song Plus GS DM             & 44.652 & 7,53\% & LFP \\
+BYD Dolphin GS 180 EV           & 32.334 & 5,45\% & LFP \\
+BYD Song Pro GS DM              & 30.274 & 5,11\% & LFP \\
+Toyota Corolla Altis Premium H  & 22.147 & 3,73\% & NiMH \\
+GWM Haval H6 PHEV 19            & 16.946 & 2,86\% & NMC \\
+BYD Dolphin Mini GS EV          & 15.820 & 2,67\% & LFP \\
+GWM Haval H6 Premium HEV        & 15.623 & 2,63\% & NMC \\
+BYD King GS DM                  & 15.181 & 2,56\% & LFP \\
+GWM Haval H6 GT                 & 13.088 & 2,21\% & NMC \\
+GWM Haval H6 Premium PHEV       & 10.911 & 1,84\% & NMC \\
+CAOA Chery Tiggo 8 PHEV         &  9.759 & 1,65\% & NMC \\
+BYD Seal AWD GS 590 EV          &  8.132 & 1,37\% & LFP \\
+BYD Dolphin Plus 310 EV         &  7.631 & 1,29\% & LFP \\
+\bottomrule
+\end{tabular}
+\fonte{ABVE (BI Geral) e PBEV. Amostra completa de 50 modelos disponível na
+       planilha-fonte.}
+\end{table}
+
+\subsubsection{Composição por Categoria de Veículo}
+\label{subsec:composicao-categoria}
+
+Segmentando a amostra por categoria de veículo, observa-se que a predominância do
+LFP concentra-se fortemente nos modelos 100\% elétricos (BEV), enquanto o NiMH está
+associado quase exclusivamente aos híbridos convencionais (HEV) de fabricantes
+tradicionais (Toyota e Honda). Não foi possível isolar, na base de dados
+consultada, uma quebra específica para a categoria de híbridos \textit{plug-in}
+(PHEV): os modelos dessa categoria permanecem diluídos no levantamento agregado da
+Tabela~\ref{tab:emplacamentos-geral} (por exemplo, GWM Haval H6 PHEV, CAOA Chery
+Tiggo 8 PHEV e GWM Tank 300 PHEV), motivo pelo qual a segmentação apresentada a
+seguir limita-se às categorias BEV e HEV.
+
+\begin{table}[H]
+\centering
+\caption{Composição química — veículos 100\% elétricos (BEV), modelos mais
+         relevantes.}
+\label{tab:bev}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Modelo} & \textbf{Quantidade} & \textbf{Market Share (BEV)} & \textbf{Química} \\
+\midrule
+BYD Dolphin Mini GS5 EV  & 44.730 & 23,98\% & LFP \\
+BYD Dolphin GS 180 EV    & 32.334 & 17,34\% & LFP \\
+BYD Dolphin Mini GS EV   & 15.820 &  8,48\% & LFP \\
+BYD Seal AWD GS 590 EV   &  8.132 &  4,36\% & LFP \\
+BYD Dolphin Plus 310 EV  &  7.631 &  4,09\% & LFP \\
+BYD Yuan Pro GS 290 EV   &  6.344 &  3,40\% & LFP \\
+GWM Ora 03 Skin BEV48    &  5.780 &  3,10\% & LFP \\
+BYD Yuan Plus GL 310 EV  &  5.390 &  2,89\% & LFP \\
+GWM Ora 03 GT BEV63      &  4.305 &  2,31\% & NMC \\
+Volvo EX30 E60 Ultra     &  3.275 &  1,76\% & NMC \\
+Renault E-Kwid Intens    &  3.061 &  1,64\% & NMC \\
+JAC E-JS1                &  2.872 &  1,54\% & LFP \\
+\bottomrule
+\end{tabular}
+\fonte{ABVE/PBEV. Amostra completa de 49 modelos (172.384 unidades,
+       $\sim$92,4\% da categoria BEV)}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Composição química — híbridos convencionais (HEV), modelos mais
+         relevantes.}
+\label{tab:hev}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Modelo} & \textbf{Quantidade} & \textbf{Market Share (HEV)} & \textbf{Química} \\
+\midrule
+Toyota Corolla Cross XRX Hybrid & 51.551 & 34,91\% & NiMH \\
+Toyota Corolla Altis Premium H  & 22.147 & 15,00\% & NiMH \\
+GWM Haval H6 Premium HEV        & 15.623 & 10,58\% & NMC \\
+Toyota RAV4 H SX AWD CNT        &  6.895 &  4,67\% & NiMH \\
+GWM Haval H6 HEV                &  5.689 &  3,85\% & NMC \\
+Toyota Corolla Cross XRV Hybrid &  5.367 &  3,63\% & NiMH \\
+GWM Haval H6 HEV2               &  3.779 &  2,56\% & NMC \\
+Toyota Corolla GLI HEV          &  3.503 &  2,37\% & NiMH \\
+CAOA Chery Tiggo 7 Pro HA       &  3.340 &  2,26\% & NMC \\
+Toyota Corolla Altis HV         &  3.298 &  2,23\% & NiMH \\
+Honda Civic Hybrid Touring      &  3.265 &  2,21\% & Li-Ion (NMC) \\
+\bottomrule
+\end{tabular}
+\fonte{ABVE/PBEV. Amostra completa de 21 modelos (140.517 unidades,
+       $\sim$95,1\% da categoria HEV)}
+\end{table}
+
+% ===========================================================
+\subsection{Cenários de Frota}
+\label{sec:cenarios-frota}
+% ===========================================================
+
+Para estabelecer as projeções de eletrificação da frota automotiva brasileira com
+horizontes em 2030, 2035 e 2040, conforme descrito na
+Seção~\ref{sec:met-cenarios}, foram sintetizadas as projeções de quatro fontes
+institucionais: PDE~2035 (EPE/MME), BCG/ANFAVEA, Bright Consulting e MBC Brasil.
+
+\subsubsection{Veículos Leves}
+\label{subsec:leves}
+
+Antes de discutir as projeções futuras, é importante situar a composição atual da
+frota eletrificada em termos de massa de bateria, já que a análise de fluxo de
+materiais depende não apenas da quantidade de veículos, mas sobretudo da massa de
+bateria que cada categoria introduz no sistema. A
+Tabela~\ref{tab:categoria-massa} apresenta a participação de vendas por categoria
+de veículo, a massa média estimada do pacote de bateria e a contribuição resultante
+de cada categoria para a massa total de baterias em circulação.
+
+\begin{table}[H]
+\centering
+\caption{Participação de vendas por categoria e contribuição de massa de bateria
+         ao fluxo total.}
+\label{tab:categoria-massa}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Categoria} & \textbf{Share de vendas} & \textbf{Massa média da bateria} &
+\textbf{Contribuição de massa no fluxo total} \\
+\midrule
+HEV  & 58\% & $\sim$40\,kg  & $\sim$14\% \\
+PHEV & 15\% & $\sim$130\,kg & $\sim$12\% \\
+BEV  & 27\% & $\sim$450\,kg & $\sim$74\% \\
+\bottomrule
+\end{tabular}
+\fonte{elaborada pelos autores.}
+\end{table}
+
+O contraste entre as duas últimas colunas da Tabela~\ref{tab:categoria-massa} é
+revelador: embora o HEV responda pela maior parte das unidades vendidas (58\%), sua
+contribuição para a massa total de baterias em circulação é marginal
+($\sim$14\%), dado o pacote reduzido (da ordem de 40\,kg). Já o BEV, apesar de
+representar pouco mais de um quarto das vendas, concentra quase três quartos
+($\sim$74\%) da massa de bateria que entrará futuramente no fluxo de reciclagem, em
+função do pacote médio muito maior ($\sim$450\,kg). Essa constatação reforça a
+necessidade de tratar a análise de fluxo de materiais em base mássica, e não apenas
+em número de veículos, sob pena de subestimar sistematicamente a demanda por lítio
+e demais materiais críticos.
+
+A análise das projeções institucionais indica um consenso de que o Brasil adotará
+uma rota tecnológica distinta dos mercados europeu e chinês, priorizando a
+hibridização — especialmente o Híbrido-Flex — em detrimento da eletrificação total
+imediata, o que se explica pela grande produção de etanol no mercado brasileiro.
+Nesse cenário, os veículos elétricos com extensor de autonomia (REEV —
+\textit{Range Extended Electric Vehicle}) surgem como uma alternativa promissora ao
+país, permitindo que o veículo opere sempre em modo elétrico, sem emissões diretas,
+enquanto utiliza o etanol como fonte secundária de energia, alimentando um motor a
+combustão de alta eficiência. A Tabela~\ref{tab:projecoes-fontes} consolida as
+projeções das quatro fontes analisadas.
+
+\begin{table}[H]
+\centering
+\caption{Comparativo das projeções de eletrificação por fonte.}
+\label{tab:projecoes-fontes}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{} p{2.2cm} p{1.4cm} p{2.2cm} X X @{}}
+\toprule
+\textbf{Fonte} & \textbf{Horizonte} & \textbf{Métrica} &
+\textbf{Dados projetados} & \textbf{Premissa principal} \\
+\midrule
+Bright Consulting & 2030 & Frota circulante &
+$\sim$9,8\% híbridos (HEV/PHEV); $\sim$1,9\% elétricos puros (BEV); total
+eletrificado $\sim$6,5--7 milhões &
+Eletrificação total (BEV) limitada por custo e infraestrutura; aposta de massa no
+Híbrido-Flex \\
+\addlinespace
+PDE 2035 & 2035 & Vendas (licenciamento) &
+22,5--23\% de participação de mercado anual; \textit{mix}: 13\% HEV, 3,5\% PHEV,
+6\% BEV &
+Preferência por híbridos que aproveitam a infraestrutura de abastecimento
+existente \\
+\addlinespace
+PDE 2035 & 2035 & Frota circulante &
+3,7 milhões de veículos eletrificados (8\% da frota total) &
+Renovação de frota lenta; combustão/flex ainda 87\% da frota \\
+\addlinespace
+MBC Brasil & 2040 & Frota circulante &
+17,4 milhões de veículos eletrificados (27\% da frota total); 72\% dos
+eletrificados híbridos &
+Crescimento exponencial (44$\times$ até 2040) \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada com base em \citet{BrightConsulting}, \citet{EPE2025} e
+       \citet{MBCBrasil}.}
+\end{table}
+
+O estudo BCG/ANFAVEA trabalha com dois cenários principais de eletrificação:
+\textbf{Transição Gradual} (conservador, com aposta no Híbrido-Flex) e
+\textbf{Transição Acelerada} (otimista, com maior penetração de
+\textit{plug-ins}). A Tabela~\ref{tab:bcg} detalha a projeção de frota do BCG para
+os três horizontes analisados.
+
+\begin{table}[H]
+\centering
+\caption{Projeção da frota de veículos elétricos do BCG.}
+\label{tab:bcg}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccccccc}
+\toprule
+\textbf{Ano} & \textbf{Cenário} & \textbf{Frota total} & \textbf{BEV} &
+\textbf{MHEV} & \textbf{PHEV} & \textbf{HEV} & \textbf{ICE/Flex} & \textbf{XEV} \\
+\midrule
+\multirow{2}{*}{2030} & Gradual   & 52 M & 1 M (1,9\%)  & 2 M (3,8\%)  & 1 M (1,9\%) & 1 M (1,9\%)  & 48 M (92,3\%) & 9\%  \\
+                      & Acelerado & 52 M & 2 M (3,8\%)  & 2 M (3,8\%)  & 1 M (1,9\%) & 1 M (1,9\%)  & 47 M (90,3\%) & 10\% \\
+\addlinespace
+\multirow{2}{*}{2035} & Gradual   & 60 M & 4 M (6,7\%)  & 4 M (6,7\%)  & 1 M (1,7\%) & 3 M (5,0\%)  & 48 M (80,0\%) & 20\% \\
+                      & Acelerado & 60 M & 5 M (8,3\%)  & 4 M (6,7\%)  & 1 M (1,7\%) & 4 M (6,7\%)  & 44 M (73,3\%) & 25\% \\
+\addlinespace
+\multirow{2}{*}{2040} & Gradual   & 71 M & 9 M (12,7\%) & 8 M (11,2\%) & 2 M (2,8\%) & 7 M (10,0\%) & 48 M (67,6\%) & 35\% \\
+                      & Acelerado & 71 M & 12 M (17,0\%)& 6 M (8,4\%)  & 2 M (2,8\%) & 8 M (11,2\%) & 42 M (60,0\%) & 42\% \\
+\bottomrule
+\end{tabular}%
+}
+\fonte{BCG/ANFAVEA. Valores arredondados para o milhão mais próximo; por esse
+       motivo, a soma das categorias pode não corresponder exatamente à frota
+       total.}
+\end{table}
+
+As Figuras~\ref{fig:comparacao-frotas} e~\ref{fig:composicao-frota} comparam,
+respectivamente, os volumes absolutos e a composição percentual da frota projetada
+por cada fonte.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figuras/comparacao_frotas.png}
+    \caption{Comparação entre previsões da frota de veículos eletrificados
+             (milhões de carros), por fonte e horizonte.}
+    \label{fig:comparacao-frotas}
+    \fonte{elaborada com base em \citet{EPE2025}, \citet{BrightConsulting},
+           \citet{MBCBrasil} e BCG/ANFAVEA.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figuras/composicao_frota.png}
+    \caption{Composição da frota de veículos por fonte (participação percentual de
+             MHEV, BEV, HEV+PHEV e ICEV).}
+    \label{fig:composicao-frota}
+    \fonte{elaborada com base em \citet{EPE2025}, \citet{BrightConsulting},
+    \citet{MBCBrasil} e BCG/ANFAVEA.}
+\end{figure}
+
+A predominância de veículos híbridos (HEV) e híbridos \textit{plug-in} (PHEV)
+sugerida por todas as fontes impacta diretamente o dimensionamento da massa de
+baterias necessária. Como as baterias de híbridos são significativamente menores
+(em kWh) que as de BEVs — o que já se evidenciou na
+Tabela~\ref{tab:categoria-massa} —, a demanda total por lítio e outros materiais
+críticos por veículo será menor do que em um cenário de eletrificação pura.
+Fatores como a quantidade de veículos elétricos presentes na frota e a porcentagem
+de BEVs e PHEVs são, portanto, extremamente relevantes para a Análise de Fluxo de
+Materiais.
+
+\subsubsection{Veículos Pesados}
+\label{subsec:pesados}
+
+Para o segmento de pesados, as fontes divergem do caminho da bateria pura,
+apontando para soluções a gás e hibridização, com nichos específicos para
+elétricos.
+
+\paragraph{Ônibus.}
+Existe uma dicotomia clara entre urbano e rodoviário. Nos \textbf{urbanos},
+observa-se forte eletrificação via baterias (BEV), impulsionada por políticas
+públicas como o Novo PAC, com projeção de 28\% das vendas em 2035. Nos
+\textbf{rodoviários}, a eletrificação pura enfrenta barreiras de autonomia e
+infraestrutura, sendo a tendência híbrida ou a gás natural. Estima-se, para 2035,
+uma frota de 48,5~mil ônibus eletrificados, dos quais 43,5~mil puramente elétricos
+(foco urbano).
+
+\paragraph{Caminhões.}
+O diesel deve permanecer dominante: em 2040, caminhões a diesel ainda representarão
+cerca de 85\% da frota e, em 2035, o diesel dominará 94\% das vendas. O biometano é
+apontado pelo MBC Brasil como o principal substituto do diesel, com potencial
+técnico para substituir até 70\% do consumo — evidenciando que a bateria não é a
+única solução ``verde'' para o segmento de carga. A eletrificação via bateria (BEV)
+ficará concentrada na ``última milha'' (entregas urbanas) e em caminhões
+semileves/leves (19\% das vendas em 2035), conforme ilustrado na
+Figura~\ref{fig:frota-pesados}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{figuras/frota_pesados_carga.png}
+    \caption{Composição da frota de veículos pesados de carga
+             (Diesel/Biodiesel, Gás Natural/Biometano, Elétricos/Híbridos).}
+    \label{fig:frota-pesados}
+    \fonte{elaborada com base em \citet{EPE2025}.}
+\end{figure}
+
+Diante da projeção de que apenas uma fração marginal ($\sim$2\%) da frota de
+caminhões será composta por veículos elétricos, optou-se por \textbf{não
+contabilizar os caminhões rodoviários} na modelagem de fluxo de materiais deste
+trabalho, concentrando a análise nos segmentos de veículos leves e ônibus urbanos,
+onde a demanda por lítio apresenta relevância estatística.
+
+\subsubsection{Definição dos Cenários de Sensibilidade}
+\label{subsec:cenarios-sensibilidade}
+
+Dada a disparidade numérica entre as projeções de mercado (Bright Consulting) e as
+estimativas governamentais (PDE 2035), a estruturação de dois cenários alternativos
+— \textbf{Conservador} e \textbf{Acelerado} — permite delimitar uma faixa de
+demanda mínima e máxima para os materiais de baterias (lítio, cobalto e níquel),
+conforme detalhado na Seção~\ref{sec:met-cenarios}. Essa abordagem garante a
+robustez dos resultados, assegurando que a quantificação da massa de materiais
+permaneça válida independentemente de oscilações pontuais no mercado automotivo ao
+longo da próxima década
+

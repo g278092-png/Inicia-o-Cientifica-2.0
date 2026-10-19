@@ -1,0 +1,1069 @@
+\newpage
+\section{Revisão Bibliográfica e Contexto Tecnológico}
+\label{sec:revisao}
+
+A presente revisão bibliográfica organiza-se em duas grandes dimensões analíticas.
+A primeira (Seções~\ref{sec:contexto} a~\ref{sec:comparacao}) examina o panorama
+tecnológico e de mercado das principais químicas de baterias empregadas na
+mobilidade elétrica — NMC, LFP/LMFP, sódio-íon, estado sólido e NiMH —, tanto em
+escala global quanto com ênfase nas especificidades do mercado brasileiro. A
+segunda dimensão (Seção~\ref{sec:reciclagem}) revisa as tecnologias de reciclagem
+de baterias de íon-lítio disponíveis, seus desafios econômicos, as perspectivas de
+segunda vida e o panorama regulatório nacional e internacional. Juntas, essas duas
+dimensões estabelecem a base conceitual e quantitativa necessária para a modelagem
+do fluxo de materiais desenvolvida nos capítulos subsequentes.
+
+% ===========================================================
+\subsection{Contexto Energético Global e Nacional}
+\label{sec:contexto}
+% ===========================================================
+
+\subsubsection{A Escala da Transição: Demanda Global por Baterias}
+\label{subsec:escala-global}
+
+A transição para a mobilidade elétrica representa não apenas uma mudança de matriz
+energética, mas um desafio de escala industrial. Segundo dados da McKinsey
+\citep{McKinsey2026}, a demanda global por baterias de íon-lítio ultrapassou a
+marca de \textbf{1{,}0~TWh} em 2024, com forte aceleração, devendo atingir
+\textbf{1{,}6~TWh} já em 2025. Para contextualizar a magnitude desses números,
+1~TWh equivale à capacidade de armazenar toda a geração elétrica de uma grande
+usina hidrelétrica durante vários meses — um volume que, há menos de uma década,
+era impensável para o setor de baterias portáteis.
+
+Esse crescimento expressivo é sustentado por dois pilares principais e
+interdependentes:
+
+\begin{enumerate}
+    \item \textbf{Eletrificação do Transporte:} veículos de passageiros e frotas
+    comerciais continuam sendo os maiores consumidores de baterias, com uma demanda
+    que deve superar os \textbf{3{,}0~TWh anuais até 2030}, conforme o cenário
+    \textit{Stated Policies} da Agência Internacional de Energia \citep{IEA2025}.
+    Esse crescimento reflete tanto a expansão do número absoluto de veículos
+    elétricos nas frotas mundiais quanto o aumento da capacidade média das baterias
+    por veículo, impulsionado pela busca por maior autonomia.
+
+    \item \textbf{Sistemas de Armazenamento Estacionário (\textit{Battery Energy
+    Storage Systems} — BESS):} essenciais para estabilizar redes elétricas
+    alimentadas por fontes renováveis intermitentes, como a energia solar, os
+    sistemas BESS apresentam as \textbf{maiores taxas de crescimento relativo}
+    entre os segmentos de mercado. Sua expansão influencia diretamente o volume
+    total de materiais críticos em circulação e introduz uma nova dimensão de
+    demanda que não existia em escala relevante há cinco anos.
+\end{enumerate}
+
+A Figura~\ref{fig:demanda-global-baterias} ilustra a evolução histórica e projetada
+da demanda global por segmento de aplicação, evidenciando a trajetória de
+crescimento acelerado do setor.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width  = 15.5cm,
+    height = 7.8cm,
+    ybar stacked,
+    bar width = 11pt,
+    xtick          = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+    xticklabels    = {2020,2021,2022,2023,2024,2025,2026,2027,2028,
+                      2029,2030,2031,2032,2033,2034,2035},
+    x tick label style = {rotate=45, anchor=east, font=\footnotesize},
+    xmin = -0.7, xmax = 15.7,
+    ymin = 0, ymax = 6.3,
+    ylabel         = {Demanda global (TWh)},
+    ylabel style   = {font=\footnotesize},
+    ytick          = {0,1,2,3,4,5,6},
+    yticklabel     = {\pgfmathprintnumber[fixed,precision=1]{\tick}},
+    yticklabel style = {font=\footnotesize},
+    ymajorgrids    = true,
+    grid style     = {dotted, gray!35},
+    axis line style = {gray!60, line width=0.5pt},
+    axis x line*    = bottom,
+    axis y line*    = left,
+    legend style = {
+        at                = {(0.5,-0.34)},
+        anchor            = north,
+        font              = \footnotesize,
+        draw              = none,
+        fill              = none,
+        legend columns    = 3,
+        column sep        = 12pt,
+        legend cell align = left,
+    },
+    clip = false,
+]
+
+\addplot[fill=corTransporte, draw=none] coordinates {
+    (0,0.145) (1,0.240) (2,0.395) (3,0.585) (4,0.720) (5,1.100)
+    (6,1.380) (7,1.620) (8,1.860) (9,2.050) (10,2.200) (11,2.430)
+    (12,2.650) (13,2.860) (14,3.060) (15,3.250)
+};
+\addlegendentry{Transporte (veículos)}
+
+\addplot[fill=corBESS, draw=none] coordinates {
+    (0,0.018) (1,0.040) (2,0.080) (3,0.135) (4,0.190) (5,0.350)
+    (6,0.500) (7,0.650) (8,0.780) (9,0.920) (10,1.060) (11,1.210)
+    (12,1.370) (13,1.540) (14,1.710) (15,1.890)
+};
+\addlegendentry{Armazenamento estacionário (BESS)}
+
+\addplot[fill=corOutros, draw=none] coordinates {
+    (0,0.027) (1,0.040) (2,0.055) (3,0.070) (4,0.090) (5,0.150)
+    (6,0.190) (7,0.230) (8,0.270) (9,0.320) (10,0.370) (11,0.420)
+    (12,0.470) (13,0.520) (14,0.570) (15,0.610)
+};
+\addlegendentry{Outros (eletrônicos, indústria)}
+
+% Rótulos de total em anos-chave
+\node[font=\tiny, text=black!75, anchor=south] at (axis cs: 0,  0.34) {0,19};
+\node[font=\tiny, text=black!75, anchor=south] at (axis cs: 5,  1.75) {1,60};
+\node[font=\tiny, text=black!75, anchor=south] at (axis cs: 10, 3.78) {3,63};
+\node[font=\tiny, text=black!75, anchor=south] at (axis cs: 15, 5.90) {5,75};
+
+% Linha de início das projeções (2026)
+\draw[corLinha, dashed, line width=0.9pt, dash pattern=on 4pt off 3pt]
+    (axis cs: 5.5, 0) -- (axis cs: 5.5, 6.0);
+\draw[-{Latex[length=4pt]}, corLinha, line width=0.7pt]
+    (axis cs: 5.6, 5.85) -- (axis cs: 7.0, 5.85);
+\node[anchor=west, font=\footnotesize\bfseries, text=corLinha]
+    at (axis cs: 5.65, 6.10) {Projetado};
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Demanda global por baterias de íon-lítio por segmento de aplicação
+         (2020--2035). Valores a partir de 2026 são projetados.}
+\label{fig:demanda-global-baterias}
+\fonte{adaptado de \citet{McKinsey2026} e \citet{IEA2025}.}
+\end{figure}
+
+\subsubsection{Supercapacidade e a Queda dos Preços}
+\label{subsec:supercapacidade}
+
+Apesar do crescimento robusto da demanda, o mercado global de baterias atravessa
+simultaneamente um período de \textbf{supercapacidade produtiva}, concentrada
+especialmente na Ásia. Em 2025, a oferta instalada excedeu a demanda em
+aproximadamente \textbf{900~GWh} \citep{McKinsey2026}, criando um desequilíbrio
+estrutural com consequências relevantes sobre toda a cadeia de valor.
+
+O reflexo mais imediato dessa supercapacidade é a queda drástica e contínua nos
+preços dos pacotes de bateria. O custo médio atingiu a \textbf{mínima histórica de
+US\$~108/kWh em 2025}, representando uma redução superior a \textbf{50\%} em
+comparação aos valores de 2018 \citep{McKinsey2026}. Esse fenômeno tem um duplo
+efeito sobre a transição energética:
+
+\begin{itemize}
+    \item \textbf{Efeito positivo:} a queda de preços acelera a paridade de custo
+    total de propriedade (\textit{Total Cost of Ownership} — TCO) entre veículos
+    elétricos e a combustão, tornando a eletrificação economicamente atrativa para
+    segmentos de renda mais baixa e em mercados emergentes como o Brasil.
+
+    \item \textbf{Efeito sobre a cadeia de reciclagem:} preços mais baixos de
+    baterias novas reduzem o valor relativo dos materiais recuperados da
+    reciclagem, comprometendo a viabilidade econômica de processos de recuperação —
+    especialmente para químicas de menor valor intrínseco, como a LFP, conforme
+    detalhado na Seção~\ref{subsec:lfp-economics}.
+\end{itemize}
+
+Projeções tecno-econômicas baseadas na \textit{Lei de Wright} — que relaciona a
+redução de custos ao volume acumulado de produção — indicam que o custo dos pacotes
+LFP/LMFP pode cair para patamares de \textbf{US\$~55 a US\$~65/kWh até 2035},
+assumindo preços estáveis de matérias-primas e ganhos de eficiência em processos
+como o revestimento de eletrodos a seco (\textit{dry coating}) \citep{EUROBAT}.
+Trata-se, portanto, de um piso de custo determinado pelo custo mineral mínimo,
+abaixo do qual as margens de produção se tornam negativas.
+
+\subsubsection{Diversificação na Química das Baterias}
+\label{subsec:diversificacao-quimica}
+
+O volume massivo de energia projetado para a próxima década atua como o principal
+motor para a diversificação das químicas de bateria. A pressão crescente sobre as
+cadeias de suprimento de lítio, níquel e cobalto — minerais com distribuição
+geográfica concentrada e mercados frequentemente instáveis — exige soluções que
+equilibrem densidade energética, custo de produção e segurança de abastecimento.
+
+Nesse contexto, observa-se uma aceleração simultânea em múltiplas frentes
+tecnológicas, cada uma respondendo a diferentes necessidades de mercado:
+
+\begin{itemize}
+    \item A \textbf{migração do NMC para o LFP} em segmentos de volume e custo,
+    impulsionada pela segurança, longevidade e queda de preços do LFP;
+    \item O surgimento do \textbf{LMFP} como evolução natural do LFP, com ganho de
+    densidade energética sem abrir mão das vantagens de custo;
+    \item O desenvolvimento do \textbf{sódio-íon (Na-ion)} como tecnologia de
+    diversificação estratégica, reduzindo a dependência de minerais críticos;
+    \item A entrada gradual das \textbf{baterias em estado sólido} para aplicações
+    de nicho de alto desempenho.
+\end{itemize}
+
+Cada uma dessas tecnologias é analisada em detalhe nas seções subsequentes, com
+ênfase em suas características técnicas, trajetória de custo, perspectivas de
+mercado e implicações específicas para o contexto brasileiro.
+
+\subsubsection{O Contexto Energético Brasileiro}
+\label{subsec:contexto-brasil}
+
+O Brasil ocupa uma posição única na transição global para a mobilidade elétrica,
+condicionada por três fatores estruturais que moldam de forma determinante o perfil
+de sua frota eletrificada e, consequentemente, o fluxo de materiais de baterias.
+
+\paragraph{A rota híbrida flex como caminho próprio.}
+Enquanto mercados como a Europa e a China focam predominantemente em veículos
+puramente elétricos (BEV) de longo alcance, a frota nacional sinaliza uma
+preferência consolidada por veículos urbanos de baixo custo e rotas híbridas — em
+particular os Híbridos-Flex (HEV Flex) e Híbridos Plug-in (PHEV). Essa preferência
+não é acidental: ela decorre da ampla disponibilidade de etanol, produzido em
+escala nacional, e da vasta infraestrutura de postos de combustível já existente em
+todo o território. Nesse contexto, os Veículos Elétricos com Extensor de Autonomia
+(REEV — \textit{Range Extended Electric Vehicle}) emergem como uma alternativa
+particularmente promissora, pois permitem operação primariamente elétrica enquanto
+utilizam o etanol como fonte de energia secundária \citep{BrightConsulting}.
+
+\paragraph{A predominância de modelos asiáticos de entrada.}
+A expansão da mobilidade elétrica no Brasil é tracionada majoritariamente por
+montadoras asiáticas — especialmente BYD, GWM e JAC — que priorizam as químicas LFP
+e NMC para reduzir o preço final ao consumidor e viabilizar a comercialização de
+veículos elétricos e híbridos \textit{plug-in} em um mercado sensível a custo. Como
+demonstrado pelo levantamento de \textit{market share} desta pesquisa (detalhado na
+Seção~\ref{sec:marketshare}), o LFP representa \textbf{48,12\%} da frota
+eletrificada nacional em uma amostra de mais de 509~mil veículos \citep{ABVE}.
+
+\paragraph{A implicação direta para o fluxo de materiais.}
+A distinção entre baterias de híbridos e baterias de BEVs tem implicação
+fundamental para a análise de fluxo de materiais: as baterias de híbridos
+convencionais são significativamente menores em capacidade (kWh) do que as de
+veículos puramente elétricos. Um HEV típico opera com um pacote de 1 a 2~kWh,
+enquanto um BEV popular carrega entre 30 e 80~kWh. Isso significa que a demanda
+total por lítio e demais minerais críticos por veículo é substancialmente menor no
+cenário brasileiro — onde os híbridos predominam — do que seria em um cenário de
+eletrificação plena baseada em BEV. Contudo, essa vantagem quantitativa por unidade
+não elimina a necessidade de uma infraestrutura de reciclagem e logística reversa
+igualmente eficiente, uma vez que o volume acumulado de baterias em fim de vida
+crescerá de forma contínua ao longo das próximas décadas
+\citep{EPE2025,MBCBrasil}.
+
+A Tabela~\ref{tab:comparativo-mercados} sintetiza as principais diferenças entre a
+trajetória de eletrificação brasileira e as dos principais mercados globais de
+referência.
+
+\begin{table}[H]
+    \centering
+    \caption{Comparativo da trajetória de eletrificação: Brasil vs.\ mercados
+             globais de referência.}
+    \label{tab:comparativo-mercados}
+    \renewcommand{\arraystretch}{1.4}
+    \small
+    \rowcolors{2}{gray!10}{white}
+    \begin{tabularx}{\textwidth}{
+        >{\raggedright\arraybackslash}p{3.6cm}
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X }
+    \toprule
+    \textbf{Dimensão} & \textbf{Brasil} & \textbf{Europa} & \textbf{China} \\
+    \midrule
+    Tecnologia dominante & Híbrido-Flex (HEV) e PHEV & BEV de longo alcance & BEV e PHEV \\
+    Química predominante & LFP (48\%), NMC (33\%), NiMH (18\%) & NMC (45\%+) & LFP ($>$55\%) \\
+    Combustível alternativo & Etanol (flex) & -- & -- \\
+    Horizonte de 30\% da frota eletrificada & $\sim$2040 & $\sim$2030 & Já superado em regiões-chave \\
+    Principal indutor & Programas Mover e Novo PAC & Regulação de CO$_2$ e fim dos ICE & Subsídios diretos e mandatos \\
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+A compreensão dessas especificidades é indispensável para qualquer modelagem do
+fluxo de materiais que pretenda ser representativa da realidade nacional. As seções
+seguintes aprofundam o exame de cada tecnologia de bateria presente nesse cenário,
+analisando suas características técnicas, trajetória econômica e perspectivas de
+mercado no Brasil.
+
+% ===========================================================
+\subsection{Química das Baterias}
+\label{sec:quimicas}
+% ===========================================================
+
+A escolha da química de bateria determina, de forma direta, a densidade energética
+disponível por veículo, o custo por kWh, os riscos da cadeia de suprimentos e,
+sobretudo, a composição dos materiais que futuramente entrarão no fluxo de
+reciclagem. Esta seção revisa as cinco tecnologias relevantes para o contexto
+brasileiro — NMC, LFP/LMFP, sódio-íon, estado sólido e NiMH —, analisando para cada
+uma seus fundamentos técnicos, trajetória de custo, perspectivas de mercado e
+implicações para o fluxo de materiais nacional.
+
+\subsubsection{NMC (Níquel-Manganês-Cobalto)}
+\label{subsec:nmc}
+
+As baterias de química NMC consolidaram-se como o padrão de alto desempenho para
+veículos elétricos de longo alcance e segmentos \textit{premium}. Sua principal
+vantagem reside na elevada densidade energética, que permite atingir autonomias
+competitivas em pacotes de bateria mais compactos e leves em comparação a
+alternativas de menor custo. Por essa razão, o NMC é a escolha predominante em
+veículos que exigem alta \textit{performance}, como SUVs elétricos de categorias
+superiores e veículos esportivos.
+
+\paragraph{Composição e evolução das variantes.}
+A família NMC é caracterizada pela proporção relativa de níquel (Ni), manganês (Mn)
+e cobalto (Co) no cátodo. Ao longo da última década, a indústria migrou
+progressivamente para composições com menor teor de cobalto e maior proporção de
+níquel, visando simultaneamente reduzir custos e aumentar a densidade energética.
+As principais variantes são:
+
+\begin{itemize}
+    \item \textbf{NMC 111} (33\% Ni / 33\% Mn / 33\% Co): composição original, hoje
+    restrita a aplicações legadas;
+    \item \textbf{NMC 532 e NMC 622}: variantes intermediárias, que reduziram o teor
+    de cobalto para cerca de 20\%;
+    \item \textbf{NMC 811} (80\% Ni / 10\% Mn / 10\% Co): variante atual de maior
+    penetração em veículos de alta performance, com densidade energética superior,
+    porém maior sensibilidade térmica;
+    \item \textbf{NMC de alto manganês}: direção futura, que busca minimizar ainda
+    mais o cobalto sem sacrificar a capacidade.
+\end{itemize}
+
+\paragraph{Desafios e riscos da cadeia de suprimentos.}
+A dependência de minerais como cobalto e níquel expõe o NMC a volatilidade de
+preços e a riscos geopolíticos significativos. O cobalto, em particular, tem sua
+extração concentrada na República Democrática do Congo, que responde por mais de
+70\% da produção mundial, o que introduz riscos de fornecimento que afetam
+diretamente o custo de produção das células \citep{IEA2025}. O níquel de alta
+pureza, por sua vez, é majoritariamente produzido na Indonésia e nas Filipinas, com
+custos sujeitos a oscilações expressivas conforme a dinâmica de demanda global.
+
+\paragraph{Perspectivas de mercado.}
+Projeta-se que o NMC mantenha uma fatia de mercado significativa, representando
+entre 43\% e 45\% da demanda na União Europeia e na América do Norte até 2035
+\citep{McKinsey2026}. O futuro dessa química reside no refinamento contínuo da
+composição do cátodo, visando maximizar a densidade de energia e a velocidade de
+recarga enquanto se reduz a dependência do cobalto.
+
+\paragraph{Papel no mercado brasileiro.}
+No contexto nacional, o NMC tende a ocupar um nicho mais restrito, não se
+consolidando como o foco central da frota eletrificada de massa. Esse cenário
+decorre da sensibilidade ao preço do mercado brasileiro, onde a expansão da
+mobilidade elétrica é liderada por modelos de fabricantes asiáticos voltados ao
+segmento de entrada. A aplicação do NMC no território nacional concentra-se em
+veículos de alta performance, PHEVs de categorias superiores e frotas de longo
+curso, onde a maior densidade energética é mandatória para compensar o maior custo
+unitário. Conforme levantado nesta pesquisa (Seção~\ref{sec:marketshare}), o NMC
+representa \textbf{32,75\%} da frota eletrificada brasileira analisada, com presença
+expressiva em modelos da GWM, Volvo e CAOA Chery \citep{ABVE}.
+
+\subsubsection{LFP e a Transição para LMFP}
+\label{subsec:lfp}
+
+A consolidação do Lítio-Ferro-Fosfato (LFP) como a química predominante para
+veículos elétricos de entrada e de volume é um dos fenômenos mais marcantes da
+indústria de baterias na década atual. Em 2024, as baterias LFP já representavam
+\textbf{quase 50\% do mercado global} de veículos elétricos \citep{McKinsey2026},
+impulsionadas por três vantagens estruturais: segurança intrínseca superior, vida
+útil significativamente mais longa e, crucialmente, custo de produção muito
+inferior ao das químicas baseadas em níquel e cobalto.
+
+\paragraph{Fundamentos técnicos do LFP.}
+A estrutura cristalina confere à química LFP uma estabilidade térmica excepcional:
+ao contrário do NMC, o LFP não libera oxigênio em condições de abuso térmico,
+eliminando praticamente o risco de combustão espontânea (\textit{thermal runaway}).
+Esse atributo simplifica os sistemas de gerenciamento térmico (\textit{BMS}) e
+reduz o custo total do pacote de bateria. Em contrapartida, o potencial de célula
+nominal do LFP ($\approx$3,2~V) é inferior ao do NMC ($\approx$3,6--3,7~V),
+resultando em menor densidade energética por unidade de massa e volume — o que
+exige pacotes maiores e mais pesados para atingir autonomias equivalentes.
+
+\paragraph{A evolução para o LMFP.}
+É nesse contexto que a química LMFP (Lítio-Manganês-Ferro-Fosfato) emerge como a
+evolução natural da Geração~3 de baterias de lítio. A premissa técnica do LMFP
+consiste na substituição parcial do ferro pelo manganês na estrutura do cátodo, o
+que eleva o potencial de operação da célula de aproximadamente 3,2~V para níveis
+entre 3,7~V e 4,0~V \citep{EUROBAT}. Esse incremento na voltagem nominal resulta em
+um ganho de densidade energética estimado entre 15\% e 20\% em comparação ao LFP
+convencional, permitindo a fabricação de pacotes mais compactos e veículos com
+maior autonomia — sem abrir mão da segurança e do custo reduzido característicos
+das baterias de ferro.
+
+\paragraph{Trajetória de mercado e custo.}
+A competitividade das químicas de ferro deve intensificar-se ao longo dos próximos
+anos, alterando o \textit{mix} global de produção em três fases distintas:
+
+\begin{enumerate}
+    \item \textbf{Adoção em massa (2025--2028):} o LMFP começa a ser integrado em
+    novos modelos de veículos leves, atuando como solução ponte para ampliar a
+    autonomia de carros populares anteriormente limitados pela densidade do LFP
+    convencional.
+
+    \item \textbf{Domínio de mercado (2028--2035):} estima-se que a participação
+    conjunta de LFP e LMFP atinja entre 49\% e 52\% do mercado na Europa e na
+    América do Norte até 2035 \citep{McKinsey2026}. Essa família de químicas deverá
+    permanecer difícil de ser superada por tecnologias emergentes como o sódio-íon,
+    dada a vasta curva de aprendizado acumulada.
+
+    \item \textbf{Piso de custo:} projeções tecno-econômicas indicam que o custo dos
+    pacotes LFP/LMFP pode cair para US\$~55 a US\$~65/kWh até 2035
+    \citep{EUROBAT}, assumindo cenários de preços estáveis de matérias-primas e
+    ganhos de eficiência em processos como o revestimento de eletrodos a seco
+    (\textit{dry coating}).
+\end{enumerate}
+
+\paragraph{Implicações para o fluxo de materiais e a reciclagem.}
+Para o mercado brasileiro, a força do LFP/LMFP é ainda mais pronunciada, dado que
+\textbf{48,12\%} da frota eletrificada nacional é composta por veículos de
+fabricantes asiáticos que priorizam essa química \citep{ABVE}. Contudo, essa
+predominância impõe um desafio crítico à cadeia de reciclagem: o baixo valor
+intrínseco dos materiais recuperados. Ao contrário do NMC — cujo cobalto e níquel
+possuem elevado valor de mercado —, os componentes do LFP (ferro, fósforo e lítio
+em menor concentração) apresentam valor comercial significativamente menor por
+tonelada, dificultando a viabilidade econômica dos processos de recuperação sem
+ganhos expressivos de escala. Esse fenômeno é amplificado pela queda contínua dos
+preços de baterias novas, que reduz o diferencial de valor entre o material
+recuperado e a célula virgem.
+
+\subsubsection{Sódio-íon (Na-ion)}
+\label{subsec:naion}
+
+As baterias de sódio-íon têm despertado interesse crescente na indústria global
+como alternativa de baixo custo potencial às baterias de íon-lítio, especialmente
+em períodos de volatilidade de preços e riscos de escassez de minerais críticos. A
+premissa central para sua adoção repousa sobre dois pilares: a abundância
+geográfica do sódio — elemento presente em praticamente todos os continentes, sem a
+concentração geopolítica característica do lítio e do cobalto — e a compatibilidade
+com a infraestrutura de fabricação existente para o lítio, o que sugere prazos de
+escalonamento relativamente rápidos para fabricantes já estabelecidos.
+
+\paragraph{Fundamentos técnicos.}
+Do ponto de vista eletroquímico, as células Na-ion operam segundo o mesmo princípio
+das células de lítio, mas utilizando íons de sódio (Na$^+$) como portadores de
+carga. Uma vantagem logística relevante é a possibilidade de uso de coletores de
+corrente de alumínio tanto no cátodo quanto no ânodo — ao contrário do lítio, que
+exige cobre no ânodo, metal mais caro e denso. Adicionalmente, as células Na-ion
+podem ser armazenadas e transportadas com voltagem zero, aumentando a segurança
+logística e simplificando os requisitos de manuseio \citep{McKinsey2026}.
+
+\paragraph{Desafios competitivos.}
+A principal barreira à adoção em larga escala do sódio-íon é a competição direta
+com o LFP, que já atingiu economias de escala massivas e custos de produção
+extremamente baixos. A menor densidade energética inerente ao sódio em comparação
+ao lítio resulta em uma maior ``intensidade de materiais'' por kWh: são necessários
+volumes superiores de eletrólito, separador e coletores de corrente para armazenar
+a mesma quantidade de energia. Por essa razão, a viabilidade comercial do Na-ion em
+veículos leves depende criticamente de avanços tecnológicos específicos, como o
+aumento da capacidade específica dos ânodos de carbono duro (\textit{hard carbon})
+para valores acima de 400~mAh/g e a elevação da voltagem operacional das células
+para patamares de 4,2~V.
+
+\paragraph{Perspectivas e papel estratégico.}
+As projeções indicam que, em cenários de mercado estáveis com preços de lítio
+moderados, a paridade de preço com o LFP (definida como probabilidade $\geq$20\% de
+ser mais barata) só deve ser alcançada \textbf{em meados de 2035}
+\citep{McKinsey2026}. Contudo, a tecnologia de sódio desempenha um papel
+fundamental como ``tecnologia de reserva'' (\textit{backstop}): em caso de choques
+na cadeia de suprimentos de grafite ou lítio, sua competitividade é acelerada
+drasticamente, podendo atingir paridade já em 2032 e vantagem de custo clara antes
+de 2040.
+
+No horizonte de 2035, espera-se que o sódio-íon capture nichos de mercado sensíveis
+ao custo, como:
+
+\begin{itemize}
+    \item veículos elétricos compactos de entrada (BEV populares);
+    \item micro-carros e veículos de mobilidade urbana;
+    \item sistemas auxiliares de 12~V, em substituição às baterias de chumbo-ácido;
+    \item armazenamento estacionário (BESS) de curta duração.
+\end{itemize}
+
+Para o cenário brasileiro, a introdução do sódio-íon pode representar uma
+oportunidade estratégica para a eletrificação de frotas urbanas e veículos de baixo
+valor comercial, complementando — e não substituindo — a rota híbrida baseada em
+LFP. O sódio atua, nesse contexto, como mitigador de riscos contra a concentração
+do fornecimento de minerais críticos, contribuindo para uma base de eletrificação
+mais sólida perante as flutuações do mercado internacional de lítio e cobalto.
+
+\subsubsection{Baterias em Estado Sólido (\textit{Solid-State})}
+\label{subsec:estadosolido}
+
+As baterias em estado sólido representam a próxima fronteira tecnológica do setor,
+prometendo saltos disruptivos em segurança e densidade energética ao substituir o
+eletrólito líquido — presente em todas as gerações comerciais atuais — por um
+condutor sólido. Trata-se de uma mudança estrutural que elimina a principal fonte
+de riscos térmicos das células convencionais e abre caminho para arquiteturas de
+eletrodo radicalmente diferentes.
+
+\paragraph{Estágio de maturidade tecnológica.}
+Segundo a escala TRL adotada pela EUROBAT, as baterias em estado sólido
+encontram-se, em 2025, majoritariamente entre os níveis TRL~4 e TRL~6, com exceção
+das células de ``semi-estado sólido'' (\textit{quasi-solid-state}), que já
+atingiram TRL~7--8 e estão em fase de maturação para produção em massa por
+fabricantes como Toyota e CATL. A produção comercial em escala de células
+\textbf{puramente em estado sólido} é projetada apenas para o período pós-2030,
+inicialmente em aplicações de nicho de alto valor, antes de se tornar solução de
+mercado de massa.
+
+\paragraph{Benefícios projetados.}
+Os principais benefícios esperados com a maturação desta tecnologia são
+\citep{McKinsey2026}:
+
+\begin{itemize}
+    \item \textbf{Densidade energética:} projeções indicam alcances de
+    \textbf{400 a 450~Wh/kg} até 2030, superando significativamente os
+    250--300~Wh/kg típicos das células NMC atuais;
+
+    \item \textbf{Recarga ultra-rápida:} estimativas de \textbf{12 a 20~minutos}
+    para recarga completa (0--100\%), viabilizadas pela maior condutividade iônica
+    dos eletrólitos sólidos de última geração;
+
+    \item \textbf{Segurança:} maior estabilidade térmica e eliminação do risco de
+    vazamento de eletrólito líquido inflamável, simplificando sistemas de
+    gerenciamento e reduzindo requisitos de proteção;
+
+    \item \textbf{Custo e durabilidade:} espera-se que o custo de produção estabilize
+    em torno de \textbf{US\$~100/kWh}, com vida útil estimada entre
+    \textbf{1.000 e 1.500 ciclos} de carga completa.
+\end{itemize}
+
+\paragraph{Gargalos de manufatura.}
+Apesar dos benefícios projetados, os gargalos de manufatura — sobretudo a garantia
+de interfaces homogêneas entre as camadas sólidas e o baixo rendimento
+(\textit{yield}) de produção — devem restringir inicialmente essa química a nichos
+de alto valor, como veículos de luxo, aviação elétrica e aplicações aeroespaciais,
+antes que ela se torne competitiva frente às tecnologias já consolidadas no
+mercado. Dessa forma, para o horizonte temporal desta pesquisa (até 2040), essa
+tecnologia não figura como fator relevante no fluxo de materiais da frota
+brasileira.
+
+\subsubsection{NiMH (Níquel-Metal Hidreto)}
+\label{subsec:nimh}
+
+As baterias de Níquel-Metal Hidreto (NiMH) desempenham um papel fundacional na
+eletrificação automotiva, tendo se consolidado historicamente como a principal
+tecnologia para veículos híbridos convencionais (HEV). Desenvolvida comercialmente
+ainda na década de 1990, a química NiMH representa a geração que tornou viável a
+hibridização em larga escala antes que o íon-lítio atingisse maturidade e custos
+competitivos.
+
+\paragraph{Características técnicas.}
+Do ponto de vista técnico, as baterias NiMH oferecem \citep{McKinsey2026}:
+
+\begin{itemize}
+    \item \textbf{Alta densidade de potência:} capacidade de fornecer e absorver
+    correntes elevadas rapidamente, fundamental para capturar energia de frenagem
+    regenerativa e fornecer picos de potência ao motor elétrico em veículos
+    híbridos;
+
+    \item \textbf{Confiabilidade operacional comprovada:} décadas de operação em
+    condições climáticas diversas — incluindo o ambiente tropical brasileiro —
+    demonstraram robustez e previsibilidade de desempenho ao longo de toda a vida
+    útil do veículo;
+
+    \item \textbf{Segurança térmica superior:} comportamento bem estabelecido em
+    condições de abuso, sem os riscos de \textit{thermal runaway} presentes em
+    químicas de lítio de primeira geração.
+\end{itemize}
+
+A principal limitação do NiMH reside na sua \textbf{menor densidade energética} em
+comparação ao íon-lítio, o que restringe seu uso a sistemas nos quais a bateria atua
+de forma auxiliar ao motor a combustão — como é o caso dos HEV convencionais — e
+inviabiliza aplicações que exigem grande autonomia em modo puramente elétrico.
+
+\paragraph{Relevância no contexto brasileiro.}
+No contexto da frota nacional, o NiMH adquire relevância contínua e estratégica.
+Impulsionado pela transição energética brasileira — que se apoia fortemente na rota
+dos veículos híbridos-flex —, o NiMH detém \textbf{18,38\%} da frota eletrificada
+nacional analisada nesta pesquisa \citep{ABVE}.
+
+\paragraph{Dinâmica de reciclagem.}
+Sob a ótica do fluxo de materiais, as baterias NiMH apresentam uma dinâmica
+diametralmente oposta à das químicas emergentes de baixo custo, como o LFP.
+Compostas por proporções significativas de \textbf{níquel} e \textbf{elementos de
+terras raras} — como lantânio (La), cério (Ce) e neodímio (Nd) — no eletrodo
+negativo (hidreto metálico), essas baterias possuem elevado valor intrínseco de
+reciclagem. Esse fator facilita substancialmente a viabilidade econômica da
+logística reversa e dos processos de recuperação, criando um fluxo de materiais de
+alto valor agregado. Portanto, mesmo diante de uma migração global gradativa para
+soluções baseadas em lítio, o volume acumulado de baterias NiMH no Brasil
+permanecerá representativo, exigindo atenção específica no planejamento das rotas
+nacionais de reciclagem.
+
+\subsubsection{Comparação entre as Tecnologias}
+\label{sec:comparacao}
+
+A Figura~\ref{fig:intensidade-materiais} apresenta a intensidade de materiais por
+kWh de cada tecnologia, ilustrando como a composição química determina tanto a
+densidade energética quanto os desafios de suprimento e reciclagem associados a
+cada alternativa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figuras/comparação_quimica_baterias.png}
+    \caption{Intensidade de materiais por tecnologia de bateria.}
+    \label{fig:intensidade-materiais}
+    \fonte{elaborada com base em \citet{IEA2025} e \citet{McKinsey2026}.}
+\end{figure}
+
+A Tabela~\ref{tab:comparativo-quimicas} sintetiza as principais dimensões técnicas,
+econômicas e ambientais de cada tecnologia, oferecendo uma visão comparativa que
+fundamenta as escolhas de modelagem adotadas na Análise de Fluxo de Materiais.
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre as tecnologias de bateria relevantes para a frota
+         eletrificada brasileira.}
+\label{tab:comparativo-quimicas}
+\renewcommand{\arraystretch}{1.4}
+\small
+\begin{tabularx}{\textwidth}{@{} p{2.2cm} X X X @{}}
+\toprule
+\textbf{Tecnologia} & \textbf{Aspectos técnicos} &
+\textbf{Dimensão econômica} & \textbf{Implicações para o fluxo de materiais} \\
+\midrule
+\textbf{NMC} &
+Alta densidade energética; ideal para veículos de longa distância e
+\textit{premium}. &
+Custo elevado e volátil devido ao Co e ao Ni; foco em mercados maduros (UE/EUA). &
+Alta dependência de minerais críticos com cadeias de suprimento instáveis; alto
+valor de reciclagem. \\
+\addlinespace
+\textbf{LFP / LMFP} &
+Alta segurança e longa vida útil; a evolução LMFP aumenta a densidade em até 20\%. &
+Líder em custo-benefício (alvo de US\$~55--65/kWh); base da eletrificação de massa
+no Brasil. &
+Desafio na reciclagem: baixo valor dos materiais (Fe, P) dificulta a viabilidade
+econômica sem escala. \\
+\addlinespace
+\textbf{Na-ion} &
+Menor densidade que o lítio; permite armazenamento com voltagem zero, aumentando a
+segurança logística. &
+Tecnologia de reserva (\textit{backstop}) contra a volatilidade do lítio; paridade
+de preço prevista para 2035. &
+Abundância geográfica do sódio; reduz dependência de minerais escassos e o uso de
+cobre. \\
+\addlinespace
+\textbf{Estado sólido} &
+Fronteira tecnológica: densidade disruptiva (400+ Wh/kg) e recarga ultra-rápida
+(12--20~min). &
+Nicho de alto valor inicial; escala comercial projetada apenas para pós-2030 a
+$\sim$US\$~100/kWh. &
+Promete maior durabilidade (1.000--1.500 ciclos); fluxo de resíduos irrelevante no
+horizonte desta pesquisa. \\
+\addlinespace
+\textbf{NiMH} &
+Alta densidade de potência e confiabilidade; limitada por menor densidade
+energética; ideal para HEV. &
+Tecnologia madura com custo consolidado; forte presença no Brasil via
+híbridos-flex de alto volume. &
+Elevado valor de reciclagem (Ni e terras raras); logística reversa economicamente
+viável. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ===========================================================
+\subsection{Processos de Reciclagem de Baterias de Íon-Lítio}
+\label{sec:reciclagem}
+% ===========================================================
+
+À medida que a frota eletrificada brasileira se expande — com predominância de
+baterias LFP (48,12\%) e NiMH (18,38\%), conforme mapeado nas seções anteriores —,
+a questão do destino final dessas baterias ao fim de sua vida útil torna-se cada
+vez mais urgente. Estima-se que o volume global de baterias descartadas atingirá
+aproximadamente \textbf{1,7~milhão de toneladas até 2030}, um crescimento de 259\%
+em relação a 2021 \citep{josefsson2024}. A reciclagem de baterias de íon-lítio
+(LIB) cumpre um papel duplo: resposta ambiental necessária para evitar a
+contaminação por metais pesados; e oportunidade estratégica de recuperação de
+materiais críticos — lítio, cobalto, níquel e manganês — que realimentam a própria
+cadeia de produção de novas células.
+
+Esta seção apresenta as principais tecnologias de reciclagem disponíveis, analisa
+os desafios econômicos específicos para a química LFP predominante no Brasil,
+discute o papel das aplicações de segunda vida (\textit{second-life}) como etapa
+intermediária na cadeia circular e contextualiza o panorama regulatório nacional
+frente às experiências internacionais.
+
+\subsubsection{Pré-tratamento e Preparação das Células}
+\label{subsec:pretratamento}
+
+Independentemente da rota de reciclagem adotada, todas as tecnologias de
+recuperação de materiais compartilham etapas comuns de pré-tratamento, que
+determinam diretamente a eficiência, a segurança e o custo das fases subsequentes
+\citep{latini2022apudhu2024}.
+
+A primeira etapa obrigatória é a descarga elétrica das células, que devem ser
+reduzidas a uma tensão inferior a 1{,}5\,V antes de qualquer manipulação mecânica.
+A ausência de padronização nessa etapa — com variação significativa entre modelos e
+fabricantes — representa um dos principais gargalos logísticos identificados em
+estudos europeus \citep{slattery2021apudmuller2025}. O peso elevado dos pacotes de
+baterias de veículos elétricos, frequentemente superior a 500\,kg, exige
+equipamentos certificados para transporte e armazenamento, elevando os custos da
+cadeia de logística reversa.
+
+Na sequência, as células são submetidas a processos mecânicos de trituração
+(\textit{shredding}), peneiramento e separação por densidade, produzindo a chamada
+\textit{black mass} — mistura de materiais ativos do cátodo e do ânodo (grafite,
+óxido de lítio, partículas metálicas) e impurezas diversas. A \textit{black mass}
+constitui o insumo central para as etapas pirometalúrgicas ou hidrometalúrgicas
+subsequentes, e sua qualidade influencia diretamente a eficiência da recuperação de
+metais.
+
+\subsubsection{Rotas de Reciclagem}
+\label{subsec:rotas}
+
+A literatura científica consolida cinco grandes rotas tecnológicas para a reciclagem
+de LIBs: pirometalurgia, hidrometalurgia, reciclagem direta, biolixiviação e
+métodos eletroquímicos \citep{balachandran2024,muller2025}.
+
+\paragraph{Pirometalurgia.}
+A rota mais madura e amplamente implantada comercialmente (TRL~9). Consiste na
+fusão das células ou da \textit{black mass} em fornos a temperaturas de
+\textbf{1.400--1.500\,°C}, produzindo uma liga metálica (\textit{matte}) rica em
+cobalto, níquel e cobre, posteriormente refinada por etapas hidrometalúrgicas
+complementares. Suas limitações críticas incluem a perda total de lítio e grafite —
+oxidados e incorporados à escória (\textit{slag}) —, alta intensidade energética e
+emissão de compostos fluorados oriundos da decomposição do eletrólito
+(LiPF\textsubscript{6}), exigindo sistemas dispendiosos de tratamento de gases.
+Para a química LFP, cujos materiais de maior valor (lítio e ferro) são precisamente
+os que se perdem no processo, a pirometalurgia oferece adequação baixa. Em termos
+climáticos, \citet{muller2025} estimam redução de \textbf{27\% no Potencial de
+Aquecimento Global (GWP)} em relação à produção primária.
+
+\paragraph{Hidrometalurgia.}
+Rota de maior adoção global, representando cerca de 57\% de todas as publicações
+sobre reciclagem de LIBs \citep{zhao2025}. Baseia-se na dissolução da
+\textit{black mass} em soluções ácidas (ácido clorídrico, sulfúrico ou nítrico),
+seguida de etapas de purificação, precipitação seletiva e extração por solvente
+para separar individualmente lítio, cobalto, níquel, manganês e cobre em compostos
+de alta pureza. Apresenta menor intensidade energética ($<$100\,°C), capacidade de
+recuperar o lítio na forma de carbonato ou hidróxido de grau bateria ($>$90\% em
+meio ácido) e maior flexibilidade de escala — instalações podem ser dimensionadas
+para volumes menores, sendo mais adequadas a mercados emergentes como o Brasil. Do
+ponto de vista ambiental, representa uma redução de 39\% no GWP para células
+NMC~811, equivalente a uma economia de 25{,}5\,kg\,CO\textsubscript{2}eq/kWh em
+relação à produção primária — o melhor desempenho climático entre as rotas
+convencionais \citep{muller2025}. Para a química LFP, a viabilidade econômica da
+hidrometalurgia permanece frágil, dado o baixo valor dos materiais recuperados
+(Fe, P), problema detalhado na Seção~\ref{subsec:lfp-economics}.
+
+\paragraph{Reciclagem Direta (\textit{Direct Recycling}).}
+Abordagem radicalmente distinta, que visa \textbf{preservar e regenerar a estrutura
+cristalina} do material ativo do cátodo, evitando a dissolução e a re-síntese
+química completa. O processo envolve: (i)~separação e coleta do material ativo do
+cátodo; (ii)~relitiação, ou seja, a reinserção de íons de lítio perdidos durante os
+ciclos de carga e descarga; e (iii)~tratamento térmico para restaurar a ordem
+estrutural. A principal vantagem reside no alto valor agregado do produto: o
+material ativo regenerado pode ser utilizado diretamente na fabricação de novas
+baterias, evitando os processos energéticos e químicos das rotas metalúrgicas.
+\citet{balachandran2024} identificam a reciclagem direta como a rota com maior
+potencial de impacto para a economia circular, mas reconhecem desafios críticos:
+necessidade de alta homogeneidade dos lotes de entrada e dificuldade de garantir
+desempenho eletroquímico reprodutível. Para o Brasil, esta rota é particularmente
+promissora para o LFP: a estabilidade da estrutura do LiFePO\textsubscript{4}
+facilita a regeneração, e estudos recentes demonstraram a recuperação de
+FePO\textsubscript{4} de resíduos de extração de lítio para uso em novas células
+\citep{hu2024}. Maturidade atual: TRL~5--7.
+
+\paragraph{Biolixiviação (Biohidrometalurgia).}
+Rota emergente que utiliza microrganismos acidofílicos (principalmente
+\textit{Acidithiobacillus thiooxidans} e \textit{A.~ferrooxidans}) para solubilizar
+e extrair metais da \textit{black mass} por meio de reações biológicas, com menor
+consumo de reagentes químicos sintéticos. Ainda apresenta taxas de extração mais
+baixas e tempos de processo mais longos do que a hidrometalurgia convencional,
+limitando sua aplicação industrial imediata \citep{balachandran2024}. Maturidade
+atual: TRL~3--5.
+
+\paragraph{Métodos Eletroquímicos.}
+Técnicas de desenvolvimento recente que empregam processos eletroquímicos para a
+recuperação seletiva de metais a partir de soluções de lixiviação. Oferecem alta
+seletividade iônica e compatibilidade com fontes de energia renovável
+\citep{zhu2024}. Atualmente são utilizados principalmente como etapas de purificação
+dentro de fluxos hidrometalúrgicos integrados; seu desenvolvimento pleno em escala
+industrial está projetado para o período pós-2030. Maturidade atual: TRL~4--6.
+
+A Tabela~\ref{tab:rotas-reciclagem} sintetiza as principais características
+técnicas, econômicas e ambientais de cada rota.
+
+\begin{table}[H]
+\centering
+\caption{Comparativo entre as rotas de reciclagem de baterias de íon-lítio.}
+\label{tab:rotas-reciclagem}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{} p{3cm} X X X X @{}}
+\toprule
+\textbf{Critério} & \textbf{Pirometalurgia} & \textbf{Hidrometalurgia} &
+\textbf{Reciclagem Direta} & \textbf{Bio / Eletroquímica} \\
+\midrule
+Maturidade (TRL) & Alta (TRL~9) — comercial & Alta (TRL~9) — comercial &
+Média (TRL~5--7) — piloto & Baixa/Média (TRL~3--6) — laboratório \\
+\addlinespace
+Temperatura & 1.400--1.500\,°C & $<$100\,°C & 200--900\,°C (recozimento) &
+Ambiente ($\sim$25--50\,°C) \\
+\addlinespace
+Recuperação de Li & Muito baixa (Li vai para a escória) &
+Alta ($>$90\% em meio ácido) & Alta (com relitiação) & Moderada a alta \\
+\addlinespace
+Adequação ao LFP & Baixa — Fe e P perdidos & Moderada — rentabilidade limitada &
+Alta — estrutura olivínica estável & Em avaliação \\
+\addlinespace
+Impacto ambiental (GWP) & $-$27\% vs.\ produção primária &
+$-$39\% vs.\ produção primária & Potencialmente inferior ao hidro & Em estudo \\
+\addlinespace
+Custo relativo & Alto (\textit{capex} elevado, escala de fusão) &
+Médio (reagentes + efluentes) & Baixo/Médio (dependente de escala) &
+Baixo (perspectiva de longo prazo) \\
+\bottomrule
+\end{tabularx}
+\fonte{adaptado de \citet{balachandran2024} e \citet{muller2025}.}
+\end{table}
+
+\subsubsection{Desafios Econômicos: Problemas da LFP}
+\label{subsec:lfp-economics}
+
+A predominância de baterias LFP na frota eletrificada brasileira coloca o país
+diante de uma dificuldade estrutural de reciclagem. Ao contrário das baterias NMC —
+que contêm cobalto e níquel em proporções significativas, tornando economicamente
+atrativa a recuperação —, os componentes do LFP (lítio, ferro e fósforo) possuem
+valor intrínseco substancialmente menor. Estudos citados por \citet{muller2025}
+indicam que o valor de mercado dos materiais recuperados de baterias LFP situa-se
+entre USD~300 e USD~600 por tonelada, resultando em prejuízo líquido sob as
+condições operacionais atuais da maior parte das instalações de reciclagem. Como
+consequência prática, recicladores comerciais preferem lotes de baterias NMC,
+relegando as baterias LFP ao descarte como resíduo perigoso ou à venda a preços
+negligenciáveis \citep{nrel2023}.
+
+Esse cenário é agravado pela queda contínua do preço do carbonato de lítio — que
+recuou de picos históricos em 2022 para valores muito inferiores em 2024--2025 —,
+reduzindo ainda mais o incentivo econômico para a recuperação de lítio de baterias
+LFP. \citet{chen2025} identificam os seguintes gargalos adicionais:
+
+\begin{itemize}
+    \item \textbf{Dificuldade de lixiviação seletiva:} a estrutura olivínica estável
+    do LiFePO\textsubscript{4} exige condições mais agressivas de dissolução em
+    ácido, elevando o consumo de reagentes e os custos operacionais.
+
+    \item \textbf{Baixa separabilidade de Fe e P:} ao contrário de Ni, Co e Mn, o
+    ferro e o fósforo não possuem rotas de valorização simples dentro das cadeias de
+    reciclagem de baterias existentes.
+
+    \item \textbf{Regulações ambientais crescentes:} normas sobre descarte de
+    efluentes ácidos e gestão de resíduos fluorados elevam os custos de
+    conformidade.
+
+    \item \textbf{Escala insuficiente no curto prazo:} somente a partir de grandes
+    volumes processados a economia de escala reduz o custo unitário ao ponto de
+    rentabilidade; o pico de descarte da primeira geração de baterias LFP
+    brasileiras está projetado para \textbf{2030--2035}.
+\end{itemize}
+
+A resposta tecnológica mais promissora é a reciclagem direta do material ativo do
+cátodo LFP, que elimina a necessidade de dissolução e re-síntese química completa.
+Complementarmente, a recuperação da grafite do ânodo como subproduto de valor
+crescente — dada a expansão global das baterias de sódio-íon e do mercado de ânodos
+de silício — pode melhorar a economia do processo \citep{nrel2023}.
+
+Para o contexto brasileiro, a viabilidade da reciclagem de LFP dependerá
+criticamente de dois fatores: (i)~\textbf{escala} — somente a partir de grandes
+volumes processados a economia de escala reduzirá o custo unitário ao ponto de
+rentabilidade; e (ii)~\textbf{inovação tecnológica} — processos de reciclagem direta
+adaptados à realidade industrial nacional e ao perfil específico das baterias
+presentes na frota. A Tabela~\ref{tab:lfp-gargalos} sintetiza esses gargalos.
+
+\begin{table}[H]
+\centering
+\caption{Gargalos econômicos da reciclagem de baterias LFP e implicações para o
+         contexto brasileiro.}
+\label{tab:lfp-gargalos}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{} p{3cm} X X @{}}
+\toprule
+\textbf{Fator} & \textbf{Descrição} & \textbf{Implicação para o Brasil} \\
+\midrule
+Baixo valor intrínseco dos materiais &
+Fe e P têm valor de mercado muito inferior ao Co e ao Ni do NMC; materiais
+recuperados do LFP valem USD~300--600/t &
+Margens negativas nas operações convencionais; recicladores preferem lotes NMC \\
+\addlinespace
+Queda do preço do carbonato de lítio &
+Pico histórico em 2022; recuo acentuado em 2024--2025 reduz o valor do Li
+recuperado &
+Diminui o único componente de valor relativo do LFP, piorando a equação econômica \\
+\addlinespace
+Dificuldade de lixiviação seletiva &
+Estrutura olivínica estável exige condições ácidas mais agressivas, elevando o
+custo de reagentes &
+Aumenta o custo operacional da hidrometalurgia aplicada ao LFP \\
+\addlinespace
+Baixa separabilidade de Fe e P &
+Ferro e fósforo não possuem rotas de valorização simples nas cadeias existentes &
+Limita receitas secundárias e onera o tratamento de efluentes \\
+\addlinespace
+Escala insuficiente (curto prazo) &
+Apenas grandes volumes reduzem o custo unitário ao ponto de rentabilidade &
+Pico de descarte da 1\textsuperscript{a} geração de baterias LFP projetado para
+2030--2035 — janela para preparação regulatória e industrial \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada com base em \citet{muller2025}, \citet{chen2025} e
+       \citet{nrel2023}.}
+\end{table}
+
+\subsubsection{Segunda Vida das Baterias (\textit{Second-Life})}
+\label{subsec:secondlife}
+
+Uma etapa intermediária de grande relevância estratégica — tanto para ampliar o
+valor econômico extraído das baterias quanto para aliviar a pressão sobre a
+infraestrutura de reciclagem — é a reutilização das baterias em \textbf{aplicações
+de segunda vida} (\textit{second-life batteries}, SLB). Quando um pacote de bateria
+de veículo elétrico perde entre 15\% e 20\% de sua capacidade inicial, torna-se
+inadequado para tração veicular devido aos impactos na autonomia, na aceleração e
+na regeneração \citep{moseley2019}. No entanto, essa mesma bateria retém entre 70\%
+e 85\% de sua capacidade eletroquímica, tornando-a plenamente adequada para
+aplicações estacionárias de menor exigência, como sistemas de armazenamento de
+energia em edifícios, subestações de fontes renováveis e infraestrutura de
+telecomunicações.
+
+A relevância deste ciclo de valor para o fluxo de materiais é significativa:
+\citet{baars2021} demonstram que o reaproveitamento de baterias usadas pode
+satisfazer mais de 100\% da demanda de armazenamento estacionário por
+\textit{second-life} até 2050, enquanto a reciclagem tradicional cobriria cerca de
+61\% da demanda por materiais de novas baterias no mesmo período \citep{est2025}.
+Além disso, a segunda vida posterga o ingresso das baterias no sistema de
+reciclagem por 8 a 12 anos adicionais após o fim do uso veicular, reduzindo o
+consumo imediato de energia e recursos para produção de novas células
+\citep{mdpisustain2024}. Para baterias LFP — que já possuem maior longevidade em
+ciclos —, esta janela pode ser ainda mais extensa, o que é particularmente
+relevante para o contexto brasileiro.
+
+A implantação de mercados de segunda vida enfrenta, contudo, barreiras
+identificadas pela literatura \citep{battmdpi2025}:
+
+\begin{itemize}
+    \item \textbf{Ausência de padronização} para avaliação do Estado de Saúde
+    (\textit{State of Health} — SOH) das baterias retiradas de veículos.
+
+    \item \textbf{Regulações conflitantes} sobre classificação de resíduos: na
+    maioria dos países, baterias aposentadas são classificadas como resíduo
+    perigoso, dificultando o transporte e o comércio para reaproveitamento.
+
+    \item \textbf{Incerteza sobre responsabilidade legal} e garantias de desempenho
+    das baterias reaproveitadas.
+
+    \item \textbf{Falta de modelos de negócio consolidados} que conectem
+    desmontadores, certificadores e operadores de sistemas de armazenamento.
+\end{itemize}
+
+Para o Brasil, a regulamentação da segunda vida deve ser considerada parte
+integrante de uma política nacional de baterias, dado que o parque de baterias LFP
+e NiMH acumulado na frota representará, a partir de \textbf{2030--2032}, um volume
+relevante de unidades aptas para reaproveitamento em sistemas estacionários —
+alinhado à expansão das fontes renováveis intermitentes na matriz elétrica
+nacional.
+
+\subsubsection{Contexto Regulatório: Brasil e Panorama Internacional}
+\label{subsec:regulatorio}
+
+A maturidade do ecossistema de reciclagem de baterias em qualquer país está
+diretamente atrelada à solidez de seu arcabouço regulatório. A literatura e as
+fontes setoriais identificam um gradiente de desenvolvimento regulatório que vai da
+China e da União Europeia — consideradas referências globais — até economias
+emergentes como o Brasil, cujo quadro normativo permanece fragmentado
+\citet{regulationsmdpi2025}.
+
+Na China, desde 2016 consolida-se um arcabouço de Responsabilidade Estendida do
+Produtor (EPR) com requisitos de rastreabilidade digital (passaporte de bateria),
+metas de coleta e reciclagem atribuídas aos fabricantes de veículos e incentivos
+fiscais para recicladores certificados. O resultado é uma elevação da taxa de
+reciclagem de baterias de VEs de 25\% em 2020 para 40\% em 2023 \citep{miit2024}. A
+\textbf{Coreia do Sul}, por sua vez, desde 2024 classifica baterias EV como
+``recursos recicláveis'', desonerando unidades não danificadas de regulações de
+resíduos perigosos e estabelecendo avaliação obrigatória de desempenho antes da
+retirada do veículo a partir de 2027 \citep{regulationsmdpi2025}.
+
+No Brasil, a Política Nacional de Resíduos Sólidos (PNRS — Lei 12.305/2010)
+estabelece o princípio da responsabilidade compartilhada e obriga a logística
+reversa de baterias, mas seu texto não foi adaptado às especificidades das baterias
+de íon-lítio de veículos elétricos. A legislação CONAMA vigente (CONAMA 257/99) foi
+concebida originalmente para baterias de chumbo-ácido e de cádmio, não cobrindo
+adequadamente o novo contexto tecnológico \citep{oliveira2025}. Em maio de 2025, o
+Senado Federal apresentou um projeto de lei para criar a Política Nacional de
+Circularidade de Baterias, incluindo a proposição de um ``passaporte de bateria''
+com dados de composição, origem e possibilidades de reuso, alinhado ao modelo da
+União Europeia \citep{dialogueearth2026}. Um decreto federal de EPR específico para
+baterias de íon-lítio está projetado para entrar em vigor até 2027, com metas
+mínimas de reciclagem de \textbf{60 a 80\% em peso}.
+
+O Brasil possui uma referência de sucesso que pode orientar essa nova construção: o
+sistema de reciclagem de baterias de chumbo-ácido (ULABs), que, por meio de
+certificação INMETRO, eliminação de impostos sobre sucata e responsabilidade
+compartilhada, transicionou para um modelo formalizado e ambientalmente
+responsável, sendo referenciado internacionalmente \citep{leadbatteries2024}.
+
+\begin{table}[H]
+\centering
+\caption{Comparativo do contexto regulatório para reciclagem de baterias de VE.}
+\label{tab:regulatorio}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{} p{2.6cm} X X X @{}}
+\toprule
+\textbf{Dimensão} & \textbf{China} & \textbf{UE / Coreia do Sul} & \textbf{Brasil} \\
+\midrule
+Modelo regulatório &
+EPR com metas obrigatórias (desde 2016) &
+EU Battery Regulation (2023): passaporte digital, metas de coleta e reciclagem por
+química &
+PNRS (2010) + legislações estaduais (SP, MG); sem marco específico para LIB-VE
+ainda \\
+\addlinespace
+Rastreabilidade &
+Passaporte de bateria digital obrigatório; plataforma governamental de
+monitoramento &
+Passaporte de bateria exigido a partir de 2026 (Regulamento EU 2023/1542) &
+PL em tramitação no Senado (2025) prevê passaporte; sem previsão de implementação \\
+\addlinespace
+Taxa de reciclagem &
+25\% (2020) $\to$ 40\% (2023); meta de 70\% até 2027 &
+Metas de 70--80\% em peso por química até 2030; Coreia do Sul: baterias EV como
+``recursos recicláveis'' desde 2024 &
+Sem metas quantitativas definidas para LIB-VE \\
+\addlinespace
+Referência de sucesso &
+Sistema nacional integrado com incentivos fiscais e certificação de recicladores &
+Modelo de passaporte digital como referência global &
+Sistema ULAB (baterias de chumbo-ácido): modelo a replicar para LIB \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada com base em \citet{regulationsmdpi2025}, \citet{oliveira2025} e
+       \citet{dialogueearth2026}.}
+\end{table}
+
+\subsubsection{Síntese: Implicações para a Análise de Fluxo de Materiais}
+\label{subsec:sintese-reciclagem}
+
+A análise das rotas de reciclagem revela que não existe uma solução única e
+universalmente ótima para o contexto brasileiro: cada tecnologia apresenta prós e
+contras específicos quanto a maturidade industrial, capacidade de recuperação de
+materiais, impacto ambiental e viabilidade econômica. O caminho mais adequado para a
+composição da frota nacional combina três elementos complementares:
+
+\begin{enumerate}
+    \item \textbf{Aposta na reciclagem direta e na hidrometalurgia eficiente para o
+    LFP}, que apresentam melhor equilíbrio entre recuperação de lítio e custo
+    operacional;
+
+    \item \textbf{Desenvolvimento do mercado de segunda vida} para baterias LFP e
+    NiMH, postergando a entrada na cadeia de reciclagem e gerando valor
+    intermediário alinhado à expansão das renováveis na matriz elétrica nacional;
+
+    \item \textbf{Construção urgente de arcabouço regulatório} específico para
+    baterias de lítio, com instrumentos de EPR, rastreabilidade e incentivos à
+    coleta e reciclagem locais, aproveitando as lições do modelo bem-sucedido de
+    baterias de chumbo-ácido.
+\end{enumerate}
+
+Cabe ressaltar que, sem volume suficiente de baterias processadas, nenhuma rota
+tecnológica alcança rentabilidade. As projeções indicam que o pico de descarte de
+baterias LFP da primeira geração de veículos eletrificados brasileiros começará a
+se materializar entre \textbf{2030 e 2035}, momento em que a infraestrutura de
+reciclagem e o arcabouço regulatório precisarão estar consolidados para evitar que
+os problemas ambientais sejam transferidos para gerações futuras. Esses fluxos de
+saída constituirão os parâmetros centrais da Análise de Fluxo de Materiais
+desenvolvida no Capítulo~\ref{sec:resultados}, permitindo quantificar a massa de
+lítio, ferro, fósforo e terras raras que retornará ao ciclo produtivo — ou que será
+perdida na ausência de uma cadeia de reciclagem adequada.
+

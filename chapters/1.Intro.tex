@@ -1,0 +1,106 @@
+\newpage
+\section{Introdução}
+\label{sec:introducao}
+
+\subsection{Contextualização}
+\label{subsec:contextualizacao}
+
+A transição para a mobilidade elétrica representa um dos maiores desafios de
+escala industrial da atualidade, não apenas do ponto de vista energético, mas
+sobretudo do ponto de vista de materiais. A demanda global por baterias de
+íon-lítio ultrapassou a marca histórica de 1,0~TWh em 2024 e segue em trajetória
+de crescimento acelerado, impulsionada tanto pela eletrificação do transporte
+quanto pela expansão dos sistemas de armazenamento estacionário
+(\textit{Battery Energy Storage Systems} -- BESS) \citep{McKinsey2026, IEA2025}.
+Esse crescimento é acompanhado por uma diversificação intensa das químicas de
+bateria -- NMC, LFP, LMFP, sódio-íon e estado sólido --, cada uma respondendo a
+diferentes equilíbrios entre densidade energética, custo e segurança de
+suprimento de materiais críticos.
+
+Nesse cenário, a etapa de fim de vida das baterias ganha relevância crescente.
+Estima-se que o volume global de baterias descartadas atinja aproximadamente
+1,7~milhão de toneladas até 2030 \citep{melin2022}, o que coloca a reciclagem e
+o reaproveitamento de materiais críticos -- lítio, níquel, cobalto, manganês,
+ferro e fósforo -- como uma peça central da sustentabilidade da própria
+transição energética.
+
+\subsection{Problema de Pesquisa}
+\label{subsec:problema}
+
+O Brasil ocupa uma posição particular nesse contexto global. Diferentemente da
+Europa e da China, cuja trajetória de eletrificação é liderada por veículos
+puramente elétricos (BEV) de longo alcance, a frota brasileira sinaliza uma
+preferência consolidada por rotas híbridas -- em especial o Híbrido-Flex (HEV)
+e o Híbrido \textit{Plug-in} (PHEV) --, sustentada pela ampla disponibilidade de
+etanol e pela infraestrutura de abastecimento já consolidada no país. Essa
+especificidade produz um perfil de frota eletrificada dominado por baterias
+LFP e NiMH, com implicações diretas e ainda pouco exploradas para o
+dimensionamento da cadeia nacional de reciclagem.
+
+Embora a literatura internacional já disponha de estudos consolidados de
+Análise de Fluxo de Materiais (MFA) para frotas eletrificadas europeias e
+chinesas, não se identificaram estudos equivalentes que considerem a
+composição química específica da frota brasileira -- fortemente concentrada em
+LFP e NiMH, e não em NMC como nos mercados de referência -- nem a magnitude e o
+momento em que essa massa de baterias retornará ao sistema como resíduo ou
+material reciclável. Essa lacuna é agravada pela fragilidade do arcabouço
+regulatório nacional: a legislação vigente (PNRS -- Lei 12.305/2010; CONAMA
+257/99) não foi adaptada às especificidades das baterias de íon-lítio de
+veículos elétricos, e o país ainda não dispõe de metas quantitativas de
+reciclagem para essa categoria, ao contrário de China e União Europeia.
+
+\subsection{Objetivos}
+\label{subsec:objetivos}
+
+\subsubsection*{Objetivo Geral}
+
+Quantificar, por meio de uma Análise de Fluxo de Materiais (MFA), os fluxos de
+materiais críticos associados às baterias da frota eletrificada brasileira
+entre 2024 e 2040, considerando as especificidades tecnológicas e de mercado do
+país.
+
+\subsubsection*{Objetivos Específicos}
+
+\begin{enumerate}
+    \item Estabelecer, a partir do cruzamento de dados primários da ABVE e do
+    PBEV, a linha de base do \textit{market share} das químicas de bateria
+    (LFP, NMC e NiMH) na frota eletrificada nacional;
+
+    \item Construir cenários de eletrificação da frota (Conservador e
+    Acelerado) para os horizontes de 2030, 2035 e 2040, com base na síntese de
+    projeções institucionais (PDE 2035, BCG/ANFAVEA, Bright Consulting e MBC
+    Brasil);
+
+    \item Modelar, por meio da metodologia de \citet{BrunnerRechberger}, os
+    fluxos de entrada e saída de lítio, cobalto, níquel, manganês, ferro e
+    fósforo associados às baterias em uso, em fim de vida útil e em aplicações
+    de segunda vida;
+
+    \item Avaliar as implicações dos resultados obtidos para a cadeia nacional
+    de reciclagem, identificando os gargalos econômicos e regulatórios que
+    condicionam sua viabilidade.
+\end{enumerate}
+
+\subsection{Justificativa e Estrutura do Trabalho}
+\label{subsec:justificativa}
+
+A relevância deste trabalho decorre de três fatores complementares: (i) a
+dependência brasileira de minerais críticos frequentemente importados, cuja
+recuperação doméstica pode mitigar riscos de suprimento; (ii) o passivo
+ambiental representado pelo descarte inadequado de baterias em fim de vida; e
+(iii) a janela regulatória em aberto -- com um decreto federal de
+Responsabilidade Estendida do Produtor (EPR) para baterias de íon-lítio
+projetado para entrar em vigor até 2027 --, que torna urgente a produção de
+evidência técnica que subsidie a formulação dessa política.
+
+Este relatório está estruturado da seguinte forma: o Capítulo~\ref{sec:metodologia}
+descreve a metodologia adotada nas quatro frentes de trabalho -- revisão
+bibliográfica, levantamento de \textit{market share}, construção de cenários de
+frota e delineamento da MFA. O Capítulo~\ref{sec:revisao} apresenta a revisão
+bibliográfica sobre as tecnologias de bateria e as rotas de reciclagem
+disponíveis. O Capítulo~\ref{sec:resultados} apresenta os resultados obtidos,
+incluindo o \textit{market share} nacional, os cenários de frota construídos e
+os fluxos de materiais quantificados pela MFA. Por fim, o
+Capítulo~\ref{sec:conclusao} sintetiza os principais achados, discute suas
+limitações e aponta direções para trabalhos futuros.
+

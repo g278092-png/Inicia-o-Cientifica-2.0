@@ -1,0 +1,685 @@
+\newpage
+\section{Análise de Fluxo de Materiais e Energia de uma Fábrica}
+\label{sec:gigafabrica}
+
+Este capítulo apresenta uma Análise de Fluxo de Materiais e Energia (MEFA) para
+uma fábrica de células de bateria do tipo LFP (LiFePO\textsubscript{4}),
+complementando a análise em escala de frota com uma visão em escala de processo
+industrial. Os valores apresentados correspondem a faixas de referência
+consolidadas na literatura técnica sobre manufatura de células
+\citep{knehr2022batpac,degen2022,erakca2021,dai2019}, e não a medições de uma
+planta específica. Sendo assim, os valores devem ser interpretados como ordens de grandeza
+representativas e aproximadas.
+
+% ===========================================================
+\subsection{Bases de Cálculo e Fronteiras do Sistema}
+\label{subsec:giga-bases}
+% ===========================================================
+
+A análise adota como unidade \textbf{1~kWh de célula LFP acabada e
+testada}, escalonada para uma capacidade produtiva de \textbf{1~GWh/ano}. Os
+parâmetros de referência estão reunidos na Tabela~\ref{tab:giga-bases}.
+
+\begin{table}[H]
+\centering
+\caption{Parâmetros de referência da análise.}
+\label{tab:giga-bases}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{3.4cm} X @{}}
+\toprule
+\textbf{Parâmetro} & \textbf{Valor adotado} & \textbf{Observação} \\
+\midrule
+Unidade funcional & 1~kWh de célula & Escalonado para 1~GWh/ano ($\times 10^{6}$) \\
+Formato de referência & Prismática, invólucro de Al & Formato dominante em LFP automotivo \\
+Densidade energética da célula & 160~Wh/kg & Faixa atual: 150--180~Wh/kg \\
+Massa de célula & 6,25~kg/kWh & $1000~\text{Wh} \div 160~\text{Wh/kg}$ \\
+Tensão nominal & 3,2~V & Característica do LiFePO\textsubscript{4} \\
+Produção anual & 1~GWh/ano & $\approx$~6.250~t de células/ano \\
+Taxa de refugo global & 8\% &  \textit - \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{knehr2022batpac}.}
+\end{table}
+
+A fronteira do sistema é do tipo \textit{gate-to-gate}: compreende exclusivamente
+as operações entre o recebimento das matérias-primas no portão da fábrica e a
+expedição da célula acabada. Estão \textbf{incluídos} no escopo todas as etapas
+de fabricação da célula (mistura, revestimento, secagem, calandragem, corte,
+montagem, enchimento, formação, envelhecimento e teste), os circuitos internos
+de recuperação (NMP, água e sucata metálica), as utilidades consumidas na planta
+e as emissões no ponto de descarga. Estão \textbf{excluídos} a mineração e o
+refino dos minerais, a síntese do material ativo de catodo (tratado como insumo
+adquirido), a montagem de módulos e \textit{packs}, as fases de uso e fim de
+vida, o transporte e a construção da planta. Para plantas verticalmente
+integradas, que sintetizam o LiFePO\textsubscript{4} a partir de
+FePO\textsubscript{4} e Li\textsubscript{2}CO\textsubscript{3}, a fronteira deve
+ser expandida; a Tabela~\ref{tab:giga-catodo} apresenta ambas as visões.
+
+% ===========================================================
+\subsection{Matriz Geral de Fluxos}
+\label{subsec:giga-matriz}
+% ===========================================================
+
+\subsubsection{Entradas de Materiais}
+
+As Tabelas~\ref{tab:giga-catodo} a~\ref{tab:giga-estrutural} detalham as
+entradas de materiais por componente da célula.
+
+\begin{table}[H]
+\centering
+\caption{Entradas do catodo por kWh e por GWh.}
+\label{tab:giga-catodo}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{5.4cm} r r X @{}}
+\toprule
+\textbf{Item} & \textbf{kg/kWh} & \textbf{t/GWh} & \textbf{Observação} \\
+\midrule
+\textbf{LiFePO\textsubscript{4}} & 2,15 & 2.150 & $\sim$34\% da massa da célula \\
+\multicolumn{4}{@{}l}{\textit{Alternativa --- planta integrada:}} \\
+\quad FePO\textsubscript{4} (precursor) & 2,10 & 2.100 & 0,956~kg/kg (estequiometria) \\
+\quad Li\textsubscript{2}CO\textsubscript{3} (grau bateria) & 0,55 & 550 & 0,53~kg LCE teórico + perdas \\
+\quad Fonte de carbono (sacarose/glicose) & 0,10 & 100 & Precursor do revestimento de C \\
+Negro de fumo & 0,07 & 70 & Aditivo condutor \\
+PVDF (aglutinante) & 0,08 & 80 & Dissolvido em NMP \\
+\midrule
+\textbf{Subtotal do revestimento catódico} & \textbf{2,30} & \textbf{2.300} & Base seca \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{knehr2022batpac} e \citet{dai2019}.}
+\end{table}
+
+O conteúdo de lítio da célula pode ser verificado por estequiometria. O
+LiFePO\textsubscript{4} ($M = 157{,}76$~g/mol) contém 4,40\% de lítio em massa,
+e o LiPF\textsubscript{6} ($M = 151{,}9$~g/mol), 4,57\%:
+\begin{equation}
+m_{\text{Li}} = \underbrace{2{,}15 \times 0{,}0440}_{\text{catodo}}
+              + \underbrace{0{,}11 \times 0{,}0457}_{\text{eletrólito}}
+              \approx 0{,}100~\text{kg Li/kWh}
+\label{eq:giga-litio}
+\end{equation}
+o que equivale a aproximadamente \textbf{0,53~kg de carbonato de lítio
+equivalente (LCE) por kWh}, ou 532~t~LCE por GWh --- valor consistente com a
+faixa de 0,5--0,6~kg~LCE/kWh usualmente adotada para a química LFP.
+
+\begin{table}[H]
+\centering
+\caption{Entradas do anodo por kWh e por GWh.}
+\label{tab:giga-anodo}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{5.4cm} r r X @{}}
+\toprule
+\textbf{Item} & \textbf{kg/kWh} & \textbf{t/GWh} & \textbf{Observação} \\
+\midrule
+Grafite (sintético ou natural) & 1,18 & 1.180 & $\sim$94\% do revestimento anódico \\
+Negro de fumo & 0,03 & 30 & Aditivo condutor \\
+CMC (carboximetilcelulose) & 0,015 & 15 & Espessante, sistema aquoso \\
+SBR (estireno-butadieno) & 0,025 & 25 & Aglutinante elastomérico \\
+\midrule
+\textbf{Subtotal do revestimento anódico} & \textbf{1,25} & \textbf{1.250} & Base seca \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{knehr2022batpac}.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Solventes, eletrólito e separador.}
+\label{tab:giga-solventes}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{5.4cm} r r X @{}}
+\toprule
+\textbf{Item} & \textbf{kg/kWh} & \textbf{t/GWh} & \textbf{Observação} \\
+\midrule
+NMP --- circulante bruto & 1,60 & 1.600 & Pasta catódica a $\sim$60\% de sólidos \\
+NMP --- reposição líquida & 0,012 & 12 & Após recuperação de 99,3\% \\
+Água deionizada (pasta anódica) & 1,30 & 1.300 & Pasta aquosa a $\sim$50\% de sólidos \\
+\textbf{Eletrólito total} & \textbf{0,85} & \textbf{850} & $\sim$13,5\% da massa da célula \\
+\quad LiPF\textsubscript{6} (sal) & 0,11 & 110 & $\sim$13\% do eletrólito \\
+\quad Carbonatos (EC/DMC/EMC) & 0,72 & 720 & Solventes orgânicos \\
+\quad Aditivos (VC, FEC) & 0,02 & 20 & Formadores de SEI \\
+Separador (PP/PE) & 0,14 & 140 & 12--20~\textmu m \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{knehr2022batpac} e \citet{degen2022}.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Componentes estruturais.}
+\label{tab:giga-estrutural}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{5.4cm} r r X @{}}
+\toprule
+\textbf{Item} & \textbf{kg/kWh} & \textbf{t/GWh} & \textbf{Observação} \\
+\midrule
+Folha de cobre (coletor anódico) & 0,62 & 620 & 6--8~\textmu m \\
+Folha de alumínio (coletor catódico) & 0,26 & 260 & 12--15~\textmu m \\
+Invólucro, tampa, terminais e \textit{vent} (Al) & 0,80 & 800 & Célula prismática \\
+Fitas isolantes e diversos & 0,08 & 80 & --- \\
+\midrule
+\textbf{Subtotal estrutural} & \textbf{1,76} & \textbf{1.760} & $\sim$28\% da massa da célula \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{knehr2022batpac}.}
+\end{table}
+
+A Tabela~\ref{tab:giga-balanco-celula} consolida o balanço de massa da célula
+acabada.
+
+\begin{table}[H]
+\centering
+\caption{Balanço de massa da célula LFP acabada.}
+\label{tab:giga-balanco-celula}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{} l r r @{}}
+\toprule
+\textbf{Componente} & \textbf{kg/kWh} & \textbf{\% da massa} \\
+\midrule
+Revestimento catódico & 2,30 & 36,8 \\
+Revestimento anódico & 1,25 & 20,0 \\
+Eletrólito & 0,85 & 13,6 \\
+Invólucro e terminais & 0,80 & 12,8 \\
+Folha de Cu & 0,62 & 9,9 \\
+Folha de Al & 0,26 & 4,2 \\
+Separador & 0,14 & 2,2 \\
+Diversos & 0,08 & 1,3 \\
+\midrule
+\textbf{Total} & \textbf{6,30} & \textbf{100,0} \\
+\bottomrule
+\end{tabular}
+\fonte{elaborada pelos autores.}
+\end{table}
+
+A soma de componentes (6,30~kg/kWh) difere ligeiramente da massa nominal
+(6,25~kg/kWh) em função de arredondamentos. Considerando a taxa de refugo global
+de 8\%, o consumo efetivo de matéria-prima eleva-se a aproximadamente
+\textbf{6,79~kg/kWh} ($6{,}25 \div 0{,}92$), dos quais cerca de 0,54~kg/kWh
+retornam como sucata, parcialmente recuperável.
+
+\subsubsection{Utilidades}
+
+\begin{table}[H]
+\centering
+\caption{Consumo de utilidades por kWh de célula produzida.}
+\label{tab:giga-utilidades}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{4.8cm} r l X @{}}
+\toprule
+\textbf{Utilidade} & \textbf{Valor} & \textbf{Unidade} & \textbf{Faixa da literatura} \\
+\midrule
+Energia elétrica & 35 & kWh/kWh & 30--50 (madura); 55--80 (\textit{ramp-up}) \\
+Energia térmica (gás natural) & 3--8 & kWh/kWh & Plantas não eletrificadas \\
+Água industrial (captação) & 25--60 & L/kWh & Depende do resfriamento \\
+Água deionizada & 1,3--2,0 & L/kWh & Pasta anódica e limpeza \\
+Nitrogênio (N\textsubscript{2}) & 1,5--3,0 & Nm\textsuperscript{3}/kWh & Inertização e enchimento \\
+Argônio (Ar) & 0,05--0,2 & Nm\textsuperscript{3}/kWh & Soldagem a laser \\
+Ar comprimido & 3--8 & Nm\textsuperscript{3}/kWh & Pneumática geral \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{degen2022} e \citet{erakca2021}.}
+\end{table}
+
+\subsubsection{Circuitos Internos de Recuperação}
+
+A Tabela~\ref{tab:giga-loops} apresenta os circuitos internos que recirculam
+massa e energia sem que estas cruzem a fronteira do sistema.
+
+\begin{table}[H]
+\centering
+\caption{Circuitos internos de recuperação e reutilização.}
+\label{tab:giga-loops}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{2.6cm} X @{}}
+\toprule
+\textbf{Circuito} & \textbf{Recuperação} & \textbf{Fluxo recirculado} & \textbf{Descrição} \\
+\midrule
+Recuperação de NMP & 99,0--99,5\% & 1,59~kg/kWh & Condensação do vapor da secagem, destilação a vácuo e desidratação; retorna à mistura com pureza $>$99,5\% \\
+\addlinespace
+Sucata de eletrodo (pasta) & 60--80\% & 0,20--0,30~kg/kWh & Pasta fora de especificação retorna à mistura sem reprocessamento químico \\
+\addlinespace
+Sucata de eletrodo (revestido) & Externa & 0,15--0,25~kg/kWh & Delaminação; \textit{black mass} enviada a reciclador e folhas vendidas como sucata \\
+\addlinespace
+Aparas metálicas & $>$95\% & 0,05--0,09~kg/kWh & Cu e Al limpos do corte de borda \\
+\addlinespace
+Água de resfriamento & 92--97\% & 20--50~L/kWh & Torres com purga controlada \\
+\addlinespace
+Condensado da sala seca & 70--85\% & 2--5~L/kWh & Água da desumidificação retorna às utilidades \\
+\addlinespace
+Energia da formação & 30--50\% & 1--3~kWh/kWh & Descarga realimentada à rede interna por conversores bidirecionais \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{degen2022} e \citet{knehr2022batpac}.}
+\end{table}
+
+A recuperação de NMP é imprescindível por duas razões: o solvente é
+classificado como substância de elevada preocupação (SVHC) no regulamento
+europeu REACH, por toxicidade reprodutiva, e seu custo de reposição
+inviabilizaria a operação. Taxas inferiores a 98\%
+comprometem simultaneamente a conformidade ambiental e a viabilidade econômica
+da planta.
+
+\subsubsection{Saídas: Produto, Subprodutos e Emissões}
+
+\begin{table}[H]
+\centering
+\caption{Saídas de produto e subprodutos.}
+\label{tab:giga-saidas}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{5.0cm} r r X @{}}
+\toprule
+\textbf{Fluxo} & \textbf{kg/kWh} & \textbf{t/GWh} & \textbf{Destino} \\
+\midrule
+\textbf{Células LFP aprovadas} & \textbf{6,25} & \textbf{6.250} & Produto principal \\
+Células reprovadas no teste & 0,30--0,50 & 300--500 & Reciclagem externa \\
+Sucata de Cu (limpa) & 0,05 & 50 & Venda como sucata \\
+Sucata de Al (limpa) & 0,04 & 40 & Venda como sucata \\
+\textit{Black mass} de produção & 0,15--0,25 & 150--250 & Reciclador externo \\
+Pasta rejeitada & 0,05--0,10 & 50--100 & Resíduo classe I ou recuperação \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores.}
+\end{table}
+
+Cabe destacar que a sucata de produção é economicamente mais atrativa do que a
+reciclagem pós-consumo de baterias LFP discutida na
+Seção~\ref{subsec:lfp-economics}: a \textit{black mass} de fábrica é homogênea,
+de composição conhecida e livre de contaminação, condição que viabiliza a
+reciclagem direta --- rota inviável para a maior parte dos lotes pós-consumo.
+
+\begin{table}[H]
+\centering
+\caption{Emissões e efluentes por kWh de célula produzida.}
+\label{tab:giga-emissoes}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{4.6cm} r l X @{}}
+\toprule
+\textbf{Fluxo} & \textbf{Valor} & \textbf{Unidade} & \textbf{Tratamento} \\
+\midrule
+VOCs (NMP e carbonatos) & 10--25 & g/kWh & Oxidação térmica regenerativa ou carvão ativado \\
+Emissões fugitivas de eletrólito & 2--8 & g/kWh & Captação localizada \\
+Gases de formação (CO\textsubscript{2}, CO, C\textsubscript{2}H\textsubscript{4}, H\textsubscript{2}) & 5--20 & g/kWh & Degasagem pós-formação \\
+Material particulado & 0,5--2 & g/kWh & Filtros HEPA \\
+Efluente líquido tratado & 15--40 & L/kWh & Estação de tratamento própria \\
+Calor dissipado & 25--40 & \% da energia & HVAC e torres de resfriamento \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{degen2022}.}
+\end{table}
+
+As emissões de escopo~2 dependem fortemente da matriz elétrica. Adotando fatores
+de emissão aproximados de 0,10~kg\,CO\textsubscript{2}e/kWh para o Brasil e
+0,58~kg\,CO\textsubscript{2}e/kWh para a China, o consumo de 35~kWh/kWh resulta
+em cerca de \textbf{3,5~kg\,CO\textsubscript{2}e/kWh} no cenário brasileiro e
+\textbf{20,3~kg\,CO\textsubscript{2}e/kWh} no chinês --- um diferencial de
+aproximadamente seis vezes, o que favorece o argumento de produção nacional das células.
+
+% ===========================================================
+\subsection{Balanço por Etapa do Processo}
+\label{subsec:giga-etapas}
+% ===========================================================
+
+\subsubsection{Mistura e Preparação das Pastas}
+
+As pastas catódica e anódica são preparadas em misturadores ou
+extrusoras de dupla rosca. A pasta catódica emprega NMP como solvente, com teor
+de sólidos de 55--65\%, enquanto a anódica utiliza água deionizada, com 45--55\%
+de sólidos. Por kWh, entram 2,30~kg de sólidos catódicos e 1,60~kg de NMP
+(3,90~kg de pasta), além de 1,25~kg de sólidos anódicos e 1,30~kg de água
+(2,55~kg de pasta). As perdas situam-se entre 1\% e 3\%, e o consumo energético,
+entre 1,3 e 2,5~kWh/kWh. O teor de umidade do NMP deve ser mantido abaixo de
+200~ppm, pois a água residual hidrolisa posteriormente o LiPF\textsubscript{6},
+gerando ácido fluorídrico (HF).
+
+\subsubsection{Revestimento, Secagem e Calandragem}
+
+O revestimento é realizado por \textit{slot-die} a 50--80~m/min, seguido de
+secagem em forno multizona a 80--160\,°C e calandragem até porosidade de
+30--40\%. É nesta etapa que se evapora todo o solvente: 1,60~kg/kWh de NMP, dos
+quais 1,59~kg são recuperados. Trata-se da etapa mais intensiva em energia de
+toda a planta, conforme a Tabela~\ref{tab:giga-energia-coating}.
+
+\begin{table}[H]
+\centering
+\caption{Consumo energético da etapa de revestimento e secagem.}
+\label{tab:giga-energia-coating}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{} l r r @{}}
+\toprule
+\textbf{Subsistema} & \textbf{kWh/kWh} & \textbf{\% da planta} \\
+\midrule
+Fornos de secagem & 8--12 & 25--30 \\
+Recuperação e destilação de NMP & 4--7 & 12--18 \\
+Exaustão e tratamento de ar & 1--2 & 3--5 \\
+Calandragem & 0,3--0,6 & $\sim$1 \\
+\midrule
+\textbf{Subtotal} & \textbf{13--22} & \textbf{$\approx$45} \\
+\bottomrule
+\end{tabular}
+\fonte{elaborada pelos autores com base em \citet{degen2022}.}
+\end{table}
+
+O revestimento a seco (\textit{dry coating}), ao eliminar o solvente, suprime
+integralmente o forno de secagem e o circuito de NMP, com potencial de redução de
+30--45\% no consumo energético da planta. A tecnologia encontra-se em TRL~6--7.
+
+\subsubsection{Corte e Montagem}
+
+Os eletrodos são cortados por lâmina rotativa ou laser e montados por
+empilhamento (\textit{stacking}) em sala seca com ponto de orvalho de
+$-40$\,°C. As aparas de corte representam 2--5\% da área revestida: 0,10 a
+0,18~kg/kWh de eletrodo revestido, destinados à delaminação, e 0,05 a
+0,09~kg/kWh de folha metálica limpa. O consumo energético, de 1,5 a
+3,0~kWh/kWh, decorre majoritariamente da desumidificação da sala, e não do
+processo mecânico.
+
+\subsubsection{Injeção de Eletrólito e Selagem}
+
+O eletrólito (2,0--2,6~g/Ah, ou $\approx$0,85~kg/kWh) é injetado a vácuo em
+atmosfera de nitrogênio com ponto de orvalho de $-45$\,°C, seguido de
+impregnação de 6 a 24~h e selagem por soldagem a laser. As perdas por
+evaporação são de 2 a 8~g/kWh. O controle de umidade nesta etapa é
+necessário para segurança, e não apenas qualidade, dado o risco de formação de HF
+pela hidrólise do LiPF\textsubscript{6}.
+
+\subsubsection{Formação, Degasagem e Envelhecimento}
+
+A formação consiste em 2 a 5 ciclos parciais de carga a C/20--C/10, com duração
+de 12 a 36~h, durante os quais se constitui a interface sólido-eletrólito (SEI)
+e se liberam de 5 a 20~g/kWh de gases. Segue-se o envelhecimento de 7 a 21~dias
+a 25--45\,°C, com taxa de reprovação de 3--8\%. O consumo energético líquido é de
+4 a 7~kWh/kWh, dos quais 1 a 3~kWh/kWh são recuperados na descarga. Mais do que
+energético, este é o principal gargalo de capital da planta: o tempo de
+residência de até três semanas exige grandes áreas de armazenamento climatizado.
+
+% ===========================================================
+\subsection{Indicadores de Eficiência}
+\label{subsec:giga-indicadores}
+% ===========================================================
+
+\begin{table}[H]
+\centering
+\caption{Rendimento de massa e taxas de refugo por etapa.}
+\label{tab:giga-rendimento}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{} l c c c @{}}
+\toprule
+\textbf{Indicador} & \textbf{Planta Consolidada} & \textbf{\textit{Ramp-up}} & \textbf{Melhor prática} \\
+\midrule
+Rendimento global de massa & 92\% & 70--85\% & 95--96\% \\
+Taxa de refugo global & 8\% & 15--30\% & 4--5\% \\
+\quad Mistura & 1--3\% & 5--8\% & $<$1\% \\
+\quad Revestimento e secagem & 2--4\% & 8--15\% & 1,5\% \\
+\quad Corte e montagem & 2--5\% & 5--10\% & 1,5\% \\
+\quad Formação e teste & 3--8\% & 10--20\% & 1--2\% \\
+Fração do refugo recuperada & 75--85\% & 60--70\% & $>$90\% \\
+\bottomrule
+\end{tabular}
+\fonte{elaborada pelos autores com base em \citet{degen2022}.}
+\end{table}
+
+O rendimento efetivo de material, considerando a recuperação de 80\% da sucata
+gerada, é dado por:
+\begin{equation}
+\eta_{\text{efetivo}} = \frac{m_{\text{célula}} + m_{\text{recuperado}}}{m_{\text{entrada}}}
+= \frac{6{,}25 + 0{,}43}{6{,}79} \approx 98{,}4\%
+\label{eq:giga-rendimento}
+\end{equation}
+
+A recuperação de NMP, de 99,0 a 99,5\%, limita a reposição a 8--16~g/kWh
+(8--16~t/GWh por ano), com pureza do solvente recuperado superior a 99,5\% e
+consumo energético de destilação de 4 a 7~kWh/kWh.
+
+A intensidade energética é o parâmetro mais disperso da literatura, variando de
+20 a mais de 100~kWh/kWh conforme a fronteira adotada e a escala da planta
+\citep{degen2022,erakca2021}. A Tabela~\ref{tab:giga-intensidade} sintetiza os
+cenários e a Figura~\ref{fig:giga-energia} apresenta a distribuição do consumo
+no cenário de referência.
+
+\begin{table}[H]
+\centering
+\caption{Intensidade energética por cenário de maturidade.}
+\label{tab:giga-intensidade}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{5.6cm} c X @{}}
+\toprule
+\textbf{Cenário} & \textbf{kWh/kWh} & \textbf{Observação} \\
+\midrule
+\textit{Ramp-up} ou planta pequena ($<$2~GWh) & 55--80 & Baixa utilização da capacidade \\
+\textbf{Planta madura (referência)} & \textbf{30--50} & Valor central adotado: 35 \\
+Melhor prática ($>$20~GWh) & 25--32 & Economia de escala em utilidades \\
+Com revestimento a seco & 15--22 & Projeção; ainda não comercial \\
+\bottomrule
+\end{tabularx}
+\fonte{elaborada pelos autores com base em \citet{degen2022}.}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xbar,
+    width  = 12cm,
+    height = 6.2cm,
+    bar width = 12pt,
+    xmin = 0, xmax = 16,
+    xlabel = {Consumo elétrico (kWh por kWh de célula)},
+    xlabel style = {font=\footnotesize},
+    symbolic y coords = {Utilidades gerais,Processos mecânicos,Formação e envelhecimento,Sala seca,Secagem e recuperação de NMP},
+    ytick = data,
+    yticklabel style = {font=\footnotesize},
+    xticklabel style = {font=\footnotesize},
+    nodes near coords,
+    nodes near coords style = {font=\footnotesize},
+    every node near coord/.append style = {/pgf/number format/use comma},
+    xmajorgrids = true,
+    grid style = {dotted, gray!40},
+    axis x line* = bottom,
+    axis y line* = left,
+    enlarge y limits = 0.15,
+]
+\addplot[fill=gigaAzul, draw=none] coordinates {
+    (3.5,Utilidades gerais)
+    (3.5,Processos mecânicos)
+    (5.5,Formação e envelhecimento)
+    (9.5,Sala seca)
+    (13.0,Secagem e recuperação de NMP)
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Distribuição do consumo de energia elétrica no cenário de referência
+         (total de 35~kWh/kWh).}
+\label{fig:giga-energia}
+\fonte{elaborada pelos autores com base em \citet{degen2022}.}
+\end{figure}
+
+Observa-se que 64\% do consumo elétrico concentra-se na secagem e na sala seca
+--- etapas que não promovem qualquer transformação química do material, limitando-se
+a remover solvente e controlar a umidade. Essa constatação explica por que o
+revestimento a seco é considerado uma inovação, mas não um ganho para o setor.
+
+Por fim, a Tabela~\ref{tab:giga-sintese} reúne os indicadores-síntese para a
+capacidade de referência.
+
+\begin{table}[H]
+\centering
+\caption{Indicadores-síntese para uma planta de 1~GWh/ano.}
+\label{tab:giga-sintese}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{} l r @{}}
+\toprule
+\textbf{Indicador} & \textbf{Valor anual} \\
+\midrule
+Massa de células produzidas & 6.250~t \\
+Matéria-prima consumida & 6.790~t \\
+Lítio contido (LCE) & 532~t \\
+Grafite & 1.180~t \\
+Cobre & 620~t \\
+Alumínio (folha e invólucro) & 1.060~t \\
+Consumo elétrico & 35~GWh \\
+Captação de água & 25.000--60.000~m\textsuperscript{3} \\
+Refugo não recuperado & 110~t \\
+Emissão de VOCs & 10--25~t \\
+CO\textsubscript{2}e escopo~2 --- matriz brasileira & $\sim$3.500~t \\
+CO\textsubscript{2}e escopo~2 --- matriz chinesa & $\sim$20.300~t \\
+\bottomrule
+\end{tabular}
+\fonte{Elaborado por este trabalho.}
+\end{table}
+
+% ===========================================================
+\subsection{Representação do Sistema}
+\label{subsec:giga-diagrama}
+% ===========================================================
+
+A Figura~\ref{fig:giga-fluxo} apresenta o diagrama de fluxo do sistema,
+organizado em quatro colunas: entradas, etapas de processo, circuitos internos e
+saídas.
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\scriptsize,
+    base/.style    = {rectangle, rounded corners=2pt, draw, thick, align=center,
+                      minimum height=0.95cm, text width=3.1cm},
+    entrada/.style = {base, draw=gigaAzul, fill=gigaAzul!12, text width=3.3cm},
+    proc/.style    = {base, draw=black!60, fill=gray!10, text width=4.5cm},
+    loop/.style    = {base, draw=gigaLaranja, fill=gigaLaranja!12},
+    saida/.style   = {base, draw=gigaVerde, fill=gigaVerde!12},
+    util/.style    = {base, draw=gigaRoxo, fill=gigaRoxo!10, text width=8cm},
+    fluxo/.style   = {-{Latex[length=2.2mm]}, thick},
+    aux/.style     = {-{Latex[length=2mm]}, dashed, thick},
+]
+
+% ---------- Etapas de processo ----------
+\node[proc] (P1) at (0,  0.0) {\textbf{1. Mistura}\\pastas catódica e anódica};
+\node[proc] (P2) at (0, -1.7) {\textbf{2. Revestimento e secagem}\\80--160\,°C $\cdot$ 13--22 kWh/kWh};
+\node[proc] (P3) at (0, -3.4) {\textbf{3. Calandragem}\\porosidade 30--40\%};
+\node[proc] (P4) at (0, -5.1) {\textbf{4. Corte e montagem}\\sala seca a $-40$\,°C};
+\node[proc] (P5) at (0, -6.8) {\textbf{5. Enchimento e selagem}\\injeção a vácuo};
+\node[proc] (P6) at (0, -8.5) {\textbf{6. Formação e envelhecimento}\\4--7 kWh/kWh};
+\node[proc] (P7) at (0,-10.2) {\textbf{7. Teste e classificação}};
+
+% ---------- Utilidades ----------
+\node[util] (U) at (0, 2.4) {\textbf{Utilidades:} eletricidade 35 kWh/kWh $\cdot$ N\textsubscript{2}/Ar $\cdot$ água 25--60 L/kWh};
+
+% ---------- Entradas ----------
+\node[entrada] (I1) at (-5.3, 0.55) {LiFePO\textsubscript{4}, PVDF e negro de fumo\\2,30 kg/kWh};
+\node[entrada] (I2) at (-5.3,-0.55) {Grafite, CMC e SBR\\1,25 kg/kWh};
+\node[entrada] (I3) at (-5.3,-1.75) {NMP 1,60 e água DI 1,30\\kg/kWh};
+\node[entrada] (I4) at (-5.3,-2.95) {Folhas Cu 0,62 e Al 0,26\\kg/kWh};
+\node[entrada] (I5) at (-5.3,-5.1)  {Separador PP/PE\\0,14 kg/kWh};
+\node[entrada] (I6) at (-5.3,-6.3)  {Eletrólito (LiPF\textsubscript{6})\\0,85 kg/kWh};
+\node[entrada] (I7) at (-5.3,-7.4)  {Invólucro de Al\\0,80 kg/kWh};
+
+% ---------- Circuitos internos ----------
+\node[loop] (L2) at (5.4,  0.8) {Pasta rejeitada\\retorno 0,20--0,30 kg/kWh};
+\node[loop] (L1) at (5.4, -1.7) {Recuperação de NMP\\99,0--99,5\% (1,59 kg/kWh)};
+\node[loop] (L3) at (5.4, -5.1) {Aparas de corte\\0,15--0,27 kg/kWh};
+\node[loop] (L4) at (5.4, -9.3) {Energia da descarga\\1--3 kWh/kWh};
+
+% ---------- Saídas ----------
+\node[saida] (O4a) at (10.6, -1.7) {VOCs\\10--25 g/kWh};
+\node[saida] (O5)  at (10.6, -3.0) {Efluente tratado\\15--40 L/kWh};
+\node[saida] (O3)  at (10.6, -5.1) {Sucata Cu/Al e \textit{black mass}\\0,15--0,27 kg/kWh};
+\node[saida] (O4b) at (10.6, -7.3) {Gases de formação e eletrólito fugitivo\\7--28 g/kWh};
+\node[saida] (O6)  at (10.6, -9.3) {Calor dissipado\\25--40\% da energia};
+\node[saida, very thick] (O1) at (10.6,-10.7) {\textbf{Células LFP}\\\textbf{6,25 kg/kWh}};
+\node[saida] (O2)  at (10.6,-12.0) {Células reprovadas\\0,30--0,50 kg/kWh};
+
+% ---------- Moldura do processo ----------
+\begin{scope}[on background layer]
+\node[draw=black!35, dashed, rounded corners, fill=gray!3, inner sep=6pt,
+      fit=(P1)(P7), label={[font=\scriptsize\bfseries]below:Processo}] (PROC) {};
+\end{scope}
+
+% ---------- Fluxo principal de massa ----------
+\foreach \a/\b in {P1/P2,P2/P3,P3/P4,P4/P5,P5/P6,P6/P7}
+    \draw[fluxo] (\a) -- (\b);
+
+\draw[fluxo] (I1.east) -- (P1.west |- I1.east);
+\draw[fluxo] (I2.east) -- (P1.west |- I2.east);
+\draw[fluxo] (I3.east) -- ++(0.55,0) |- (P1.west);
+\draw[fluxo] (I4.east) -- ++(0.85,0) |- (P2.west);
+\draw[fluxo] (I5.east) -- (P4.west);
+\draw[fluxo] (I6.east) -- ++(0.55,0) |- (P5.west);
+\draw[fluxo] (I7.east) -- ++(0.55,0) |- (P5.west);
+
+\draw[fluxo] (P7.east) -- ++(1.2,0) |- (O1.west);
+\draw[fluxo] (P7.east) -- ++(1.2,0) |- (O2.west);
+
+% ---------- Utilidades ----------
+\draw[aux, gigaRoxo] (U) -- (PROC.north);
+
+% ---------- Circuitos internos ----------
+% pasta rejeitada: sai da mistura e retorna a ela
+\draw[aux, gigaLaranja] ([yshift=2.5mm]P1.east) -- ++(0.9,0) |- (L2.west);
+\draw[aux, gigaLaranja] (L2.north) -- ++(0,0.3) -| ([xshift=8mm]P1.north);
+% NMP: sai da secagem e retorna à mistura
+\draw[aux, gigaLaranja] (P2.east) -- (L1.west);
+\draw[aux, gigaLaranja] (L1.north) |- ([yshift=-2.5mm]P1.east);
+% aparas de corte
+\draw[aux, gigaLaranja] (P4.east) -- (L3.west);
+% energia recuperada na formação
+\draw[aux, gigaLaranja] ([yshift=-2mm]P6.east) -- ++(0.9,0) |- (L4.west);
+
+% ---------- Saídas auxiliares ----------
+\draw[aux, gigaVerde] (L1.east) -- (O4a.west);
+\draw[aux, gigaVerde] ([yshift=-3.5mm]P2.east) -- ++(0.9,0) |- (O5.west);
+\draw[aux, gigaVerde] (L3.east) -- (O3.west);
+\draw[aux, gigaVerde] (P5.east) -- ++(5.6,0) |- (O4b.west);
+\draw[aux, gigaVerde] ([yshift=2mm]P6.east) -- ++(6.0,0) |- (O4b.west);
+\draw[aux, gigaVerde] (L4.east) -- (O6.west);
+
+\end{tikzpicture}%
+}
+\caption{Diagrama de fluxo de materiais e energia da fábrica de células LFP
+         (valores por kWh de célula). Setas contínuas: fluxo principal de massa;
+         setas tracejadas: utilidades, circuitos internos e emissões.}
+\label{fig:giga-fluxo}
+\fonte{elaborada pelos autores.}
+\end{figure}
+
+A leitura do diagrama evidencia três aspectos centrais do sistema. Em primeiro
+lugar, o NMP forma um circuito praticamente fechado: a entrada bruta de
+1,60~kg/kWh é quase integralmente compensada pelo retorno de 1,59~kg/kWh, de
+modo que a entrada efetiva pela fronteira do sistema corresponde apenas à
+reposição de 8--16~g/kWh. Em segundo lugar, a energia não acompanha a massa:
+os fluxos de utilidades concentram-se nas etapas de secagem e formação, que não
+são as que movimentam a maior quantidade de material. Em terceiro lugar, o
+destino da sucata depende da etapa em que é gerada: a pasta rejeitada na mistura
+retorna ao processo sem perda de valor, enquanto o eletrodo já seco e calandrado
+exige delaminação e deixa o sistema como \textit{black mass}. Cada ponto
+percentual de refugo deslocado das etapas finais para a etapa de mistura
+representa, portanto, ganho econômico direto.
+
+% ===========================================================
+\subsection{Limitações da Análise}
+\label{subsec:giga-limitacoes}
+% ===========================================================
+
+A análise apresentada está sujeita a limitações que devem orientar sua
+interpretação. Os valores correspondem a faixas consolidadas da literatura, e não
+a medições de uma planta específica, variando conforme formato de célula, grau
+de automação, escala e idade da linha. A intensidade energética, em particular,
+apresenta grande dispersão entre estudos, sobretudo em razão de fronteiras de
+sistema distintas. A densidade energética de 160~Wh/kg constitui uma escolha de
+cenário, e todas as massas apresentadas escalam inversamente a esse valor.
+Finalmente, por tratar-se de uma fronteira \textit{gate-to-gate}, a análise não
+captura a pegada ambiental da produção das matérias-primas --- em especial do
+material ativo de catodo, que em análises \textit{cradle-to-gate} responde por
+parcela expressiva do impacto climático total da célula \citep{dai2019}.

@@ -1,0 +1,229 @@
+\newpage
+\section{Metodologia}
+\label{sec:metodologia}
+
+Este capítulo descreve as ferramentas e fontes utilizadas para produzir os
+resultados apresentados ao longo do trabalho, organizadas em quatro frentes
+metodológicas complementares: revisão bibliográfica sistemática, levantamento do
+\textit{market share} das químicas de baterias, construção dos cenários de frota
+e delineamento da Análise de Fluxo de Materiais (MFA).
+
+% ===========================================================
+\subsection{Revisão Bibliográfica}
+\label{sec:met-revisao}
+% ===========================================================
+
+A revisão bibliográfica foi conduzida de forma estruturada nas bases de dados
+\textbf{Scopus}, \textbf{Web of Science} e \textbf{ScienceDirect}, com cobertura
+temporal principal entre 2021 e 2025, de modo a capturar os avanços mais recentes
+em um setor de rápida evolução tecnológica.
+
+As buscas foram organizadas em dois eixos temáticos principais:
+
+\begin{enumerate}
+    \item \textbf{Química e tecnologia de baterias:} as palavras-chave utilizadas
+    incluíram termos como \textit{lithium-ion battery}, \textit{LFP}, \textit{NMC},
+    \textit{sodium-ion battery}, \textit{solid-state battery} e \textit{battery
+    technology roadmap}. Foram priorizados artigos de revisão com alto número de
+    citações, relatórios técnicos de organismos internacionais — como a Agência
+    Internacional de Energia (IEA) e o consórcio europeu EUROBAT — e estudos de
+    modelagem tecno-econômica que aplicam curvas de aprendizado
+    (\textit{Lei de Wright}) para projeção de custos de pacotes de baterias.
+
+    \item \textbf{Processos de reciclagem de baterias de íon-lítio:} as
+    palavras-chave empregadas foram \textit{lithium-ion battery recycling},
+    \textit{hydrometallurgy spent batteries}, \textit{pyrometallurgy LIB},
+    \textit{direct recycling cathode}, \textit{LFP recycling economic},
+    \textit{second-life battery} e \textit{battery recycling regulation Brazil}.
+    Foram priorizados artigos de revisão abrangentes, estudos de avaliação de ciclo
+    de vida e análises tecno-econômicas comparativas, bem como relatórios técnicos
+    do Laboratório Nacional de Energia Renovável dos EUA (NREL) e fontes
+    regulatórias nacionais.
+\end{enumerate}
+
+Para a avaliação da maturidade tecnológica das diferentes químicas e rotas de
+reciclagem, adotou-se a escala de \textit{Technology Readiness Level} (TRL),
+seguindo a classificação do roteiro EUROBAT para baterias automotivas
+(Gerações~3, 4 e~5).
+
+% ===========================================================
+\subsection{Levantamento do \textit{Market Share} de Químicas}
+\label{sec:met-marketshare}
+% ===========================================================
+
+A determinação da participação de mercado das diferentes químicas de baterias na
+frota eletrificada brasileira baseou-se no cruzamento de duas fontes de dados
+primários:
+
+\begin{itemize}
+    \item \textbf{Dados de emplacamentos da ABVE:} registros de vendas de veículos
+    eletrificados (BEV, PHEV e HEV) fornecidos pela Associação Brasileira do
+    Veículo Elétrico \citep{ABVE}, que constituíram a base quantitativa do estudo.
+
+    \item \textbf{Especificações técnicas do PBEV:} fichas técnicas do Programa
+    Brasileiro de Etiquetagem Veicular, utilizadas para identificar a química de
+    bateria de cada modelo comercializado no mercado nacional.
+\end{itemize}
+
+A metodologia consistiu em (i)~selecionar os modelos de maior impacto em volume de
+vendas, segmentados por categoria (BEV, PHEV e HEV); (ii)~atribuir a cada modelo a
+respectiva química de bateria com base nas fichas do PBEV e, quando necessário, em
+informações técnicas dos fabricantes; e (iii)~consolidar os dados em uma amostra
+representativa de \textbf{mais de 509\,mil veículos eletrificados}, a partir da
+qual foram calculadas as proporções de cada tecnologia — LFP, NMC e NiMH — na
+frota nacional.
+
+Essa linha de base é fundamental para a posterior Análise de Fluxo de Materiais,
+pois determina a composição química predominante das baterias que circularão e
+serão descartadas no Brasil nas próximas décadas.
+
+% ===========================================================
+\subsection{Construção dos Cenários de Frota}
+\label{sec:met-cenarios}
+% ===========================================================
+
+Para estabelecer as projeções de eletrificação da frota automotiva brasileira com
+horizontes em 2030, 2035 e 2040, foram analisados quatro documentos institucionais
+de referência:
+
+\begin{enumerate}
+    \item \textbf{PDE 2035 — Plano Decenal de Expansão de Energia}
+    \citep{EPE2025}: projeções governamentais de vendas e frota circulante de
+    veículos leves e pesados, com detalhamento do eixo de eletromobilidade.
+
+    \item \textbf{BCG/ANFAVEA:} estudo que apresenta dois cenários de eletrificação
+    — \textit{Transição Gradual} (conservador, com predominância do Híbrido-Flex) e
+    \textit{Transição Acelerada} (otimista, com maior penetração de BEV e PHEV) —
+    cobrindo os horizontes de 2030, 2035 e 2040.
+
+    \item \textbf{Bright Consulting:} previsões de mercado e frota com horizonte
+    principal em 2030, com foco na trajetória de hibridização da frota brasileira
+    \citep{BrightConsulting}.
+
+    \item \textbf{MBC Brasil — Movimento Brasil Competitivo:} estudo sobre
+    transição energética da mobilidade de baixo carbono no Brasil com horizonte em
+    2040 \citep{MBCBrasil}.
+\end{enumerate}
+
+Diante da disparidade numérica entre as projeções de mercado e as estimativas
+governamentais, optou-se por estruturar dois cenários alternativos que delimitam
+uma faixa de demanda para os materiais de baterias:
+
+\begin{itemize}
+    \item \textbf{Cenário Conservador:} atrelado à inércia da frota atual, aos
+    gargalos de infraestrutura de recarga e à predominância do Híbrido-Flex,
+    seguindo essencialmente a trajetória do PDE 2035 e do cenário gradual do BCG.
+
+    \item \textbf{Cenário Acelerado:} pressupõe a efetividade plena de programas
+    como o \textit{Mover} e o \textit{Novo PAC}, com convergência regulatória
+    global e queda acelerada dos preços de BEV, resultando em maior penetração de
+    veículos puramente elétricos, conforme o cenário otimista do BCG e as projeções
+    da Bright Consulting.
+\end{itemize}
+
+Optou-se por excluir os caminhões rodoviários do escopo da modelagem, dado que as
+projeções do PDE 2035 indicam que aproximadamente 94\% dessa frota permanecerá
+movida a diesel até 2035, tornando marginal a demanda por baterias nesse segmento.
+A análise concentra-se, portanto, nos \textbf{veículos leves} e nos
+\textbf{ônibus urbanos}, onde a eletrificação apresenta relevância estatística
+para o fluxo de materiais.
+
+% ===========================================================
+\subsection{Análise de Fluxo de Materiais (MFA)}
+\label{sec:met-mfa}
+% ===========================================================
+
+A Análise de Fluxo de Materiais será conduzida segundo a metodologia de
+\textbf{Brunner \& Rechberger} \citep{BrunnerRechberger}, que define o MFA como um
+sistema de equações de balanço de massa aplicado a processos e fluxos delimitados
+no espaço e no tempo. A estrutura metodológica do MFA seguirá os seguintes
+elementos:
+
+\begin{itemize}
+    \item \textbf{Sistema e fronteiras:} Brasil, com horizonte temporal de
+    \textbf{2024 a 2040}. Os processos considerados compreendem a entrada de
+    baterias na frota (uso), o fim de vida útil veicular, as aplicações de segunda
+    vida (\textit{second-life}) em sistemas estacionários e as rotas de reciclagem.
+
+    \item \textbf{Materiais críticos rastreados:} lítio (Li), cobalto (Co), níquel
+    (Ni), manganês (Mn), ferro (Fe), fósforo (P) e grafite — selecionados com base
+    na composição das químicas predominantes na frota nacional (LFP, NMC e NiMH).
+
+    \item \textbf{Software:} a modelagem será implementada no \textit{STAN}
+    (\textit{Substance Flow Analysis}), ferramenta padrão para MFA desenvolvida
+    pela Universidade Tecnológica de Viena, que permite a quantificação de
+    incertezas por meio de reconciliação de dados.
+
+    \item \textbf{Parâmetros de entrada:} os fluxos de entrada de materiais serão
+    calculados a partir dos cenários de frota definidos na
+    Seção~\ref{sec:met-cenarios}, combinados com os dados de \textit{market share}
+    de químicas da Seção~\ref{sec:met-marketshare} e com os valores de intensidade
+    de materiais por kWh disponíveis na literatura técnica
+    \citep{IEA2025,McKinsey2026}.
+
+    \item \textbf{Análise de sensibilidade:} os dois cenários de frota
+    (conservador e acelerado) serão utilizados para delimitar a faixa de demanda
+    mínima e máxima por materiais críticos, garantindo a robustez dos resultados
+    frente às incertezas inerentes às projeções de mercado.
+\end{itemize}
+
+% ===========================================================
+\subsection{Síntese da Abordagem Metodológica}
+\label{sec:met-sintese}
+% ===========================================================
+
+A Figura~\ref{fig:fluxo-metodologico} ilustra a integração entre as quatro frentes
+metodológicas descritas neste capítulo. As fontes de dados primários (ABVE, PBEV,
+documentos institucionais) e secundários (literatura científica) alimentam,
+respectivamente, o levantamento de \textit{market share} e a revisão
+bibliográfica. Esses dois blocos convergem para a construção dos cenários de
+frota, que por sua vez constituem os parâmetros de entrada da MFA. Os resultados
+da MFA subsidiarão as análises de impacto ambiental (LCA) e econômico (avaliação
+tecno-econômica da reciclagem) desenvolvidas nos capítulos subsequentes.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance = 1.1cm and 1.6cm,
+    box/.style = {rectangle, rounded corners, draw=black!60, thick,
+                  fill=gray!8, align=center, minimum height=1.1cm,
+                  text width=3.4cm, font=\footnotesize},
+    fonte/.style = {box, fill=blue!6},
+    arrow/.style = {-{Latex[length=3mm]}, thick}
+]
+
+% Fontes primárias e secundárias
+\node[fonte] (abve) {ABVE / PBEV\\(dados primários)};
+\node[fonte, below=of abve] (lit) {Literatura científica\\(fontes secundárias)};
+\node[fonte, right=2.4cm of abve] (inst) {Documentos institucionais\\(PDE, BCG, Bright, MBC)};
+
+% Blocos intermediários
+\node[box, right=2.4cm of lit, yshift=0.6cm] (ms) {Levantamento de\\\textit{Market Share}};
+\node[box, below=of ms] (rb) {Revisão\\Bibliográfica};
+
+% Cenários
+\node[box, right=2.6cm of ms, yshift=-0.6cm, fill=orange!10] (cen) {Cenários de\\Frota};
+
+% MFA
+\node[box, right=2.6cm of cen, fill=green!10] (mfa) {Análise de Fluxo\\de Materiais (MFA)};
+
+% Saídas
+\node[box, above right=1.0cm and 1.8cm of mfa, fill=purple!8, text width=3cm]
+    (lca) {Avaliação de Impacto Ambiental (LCA)};
+\node[box, below right=1.0cm and 1.8cm of mfa, fill=purple!8, text width=3cm]
+    (tea) {Avaliação Tecno-Econômica};
+
+% Setas
+\draw[arrow] (abve) -- (ms);
+\draw[arrow] (inst) -- (cen);
+\draw[arrow] (lit) -- (rb);
+\draw[arrow] (ms) -- (cen);
+\draw[arrow] (rb) -- (cen);
+\draw[arrow] (cen) -- (mfa);
+\draw[arrow] (mfa) -- (lca);
+\draw[arrow] (mfa) -- (tea);
+
+\end{tikzpicture}
+\caption{Fluxo metodológico integrado da pesquisa.}
+\label{fig:fluxo-metodologico}
+\end{figure}
