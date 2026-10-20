@@ -1,0 +1,288 @@
+% ============================================================
+%  Figura 9 -- Fluxograma expandido da fábrica de células LFP
+%  Fonte editável (TikZ), incluída no Cap. 5 por \resizebox.
+%  Coordenadas em cm. As posições das colunas (\X..) e das linhas (\Y..)
+%  estão definidas no início do desenho; para reorganizar o diagrama,
+%  basta alterá-las. As etapas de fabricação seguem a numeração da
+%  Tabela de balanço por etapa (tab:giga-etapas).
+% ============================================================
+\begin{tikzpicture}[
+    font=\scriptsize,
+    base/.style   = {rectangle, rounded corners=2pt, draw, thick,
+                     align=flush center, minimum height=0.85cm, inner sep=2.5pt},
+    proc/.style   = {base, draw=black!75, fill=gray!20, text width=3.4cm},
+    sup/.style    = {base, draw=black!75, fill=white, text width=3.4cm},
+    trat/.style   = {base, draw=black!75, fill=white, text width=3.1cm},
+    loopn/.style  = {base, draw=gigaLaranja!80!black, fill=gigaLaranja!10,
+                     text width=2.7cm},
+    util/.style   = {base, draw=gigaRoxo, fill=gigaRoxo!8},
+    alt/.style    = {base, draw=black!65, dashed, fill=white, text width=2.9cm},
+    ext/.style    = {trapezium, trapezium angle=72, trapezium stretches body,
+                     draw=black!75, double, fill=gray!6, align=flush center,
+                     text width=2.7cm, minimum height=0.85cm, inner sep=2pt,
+                     font=\fontsize{7}{8}\selectfont},
+    conn/.style   = {circle, draw=gigaVerde!70!black, fill=white, inner sep=0.6pt,
+                     font=\tiny\bfseries, minimum size=3.2mm},
+    mat/.style    = {-{Latex[length=2.4mm]}, line width=1.4pt, black},
+    sec/.style    = {-{Latex[length=2mm]}, line width=0.6pt, black},
+    uti/.style    = {-{Stealth[length=2.2mm]}, line width=0.8pt, gigaRoxo, dashed},
+    cir/.style    = {-{Circle[length=1.7mm]}, line width=1pt,
+                     gigaLaranja!85!black, densely dotted},
+    emi/.style    = {-{Triangle[open, length=2.2mm]}, line width=0.8pt,
+                     gigaVerde!65!black, dash dot},
+    halo/.style   = {preaction={draw=white, line width=3.4pt, -}},
+    lbl/.style    = {font=\fontsize{7}{7.8}\selectfont, fill=white, inner sep=1pt,
+                     align=center},
+    lblg/.style   = {font=\fontsize{7}{8}\selectfont\bfseries, anchor=north,
+                     inner sep=1pt},
+]
+
+% ----------------------------------------------------------------
+% POSIÇÕES
+% ----------------------------------------------------------------
+\def\XL{0}       % interfaces externas à esquerda
+\def\XR{5.15}    % operações anteriores à mistura
+\def\XS{7.4}     % abastecimento direto a partir da armazenagem
+\def\XP{10.85}   % etapas de fabricação
+\def\XB{13.0}    % barramento de refugos
+\def\XN{15.3}    % exaustão e recuperação de NMP
+\def\XD{16.6}    % operações posteriores ao teste
+\def\XT{21.8}    % tratamento de gases, efluentes e refugos
+\def\XE{27.35}   % interfaces externas à direita
+\def\YU{2.0}     % sistemas de utilidades
+\def\YA{-0.6}\def\YB{-2.4}\def\YC{-4.2}\def\YD{-6.0}
+\def\YE{-7.8}\def\YF{-9.6}\def\YG{-11.4}
+\def\YR{-12.55}  % barramento inferior de refugos
+
+% ----------------------------------------------------------------
+% UTILIDADES
+% ----------------------------------------------------------------
+\node[util, text width=19.9cm] (U) at (13.35,\YU) {\textbf{Sistemas de utilidades}:
+  subestação e distribuição elétrica $\cdot$ sala seca (desumidificação) $\cdot$
+  torres de resfriamento $\cdot$ água deionizada $\cdot$ ar comprimido $\cdot$
+  N\textsubscript{2}/Ar\\circuitos internos de água de resfriamento e de condensado
+  da sala seca (Tabela~\ref{tab:giga-loops})};
+
+% ----------------------------------------------------------------
+% EXTERNOS À ESQUERDA
+% ----------------------------------------------------------------
+\node[ext] (Eutil) at (\XL,\YU) {Rede elétrica, captação\\de água e gases técnicos:\\
+  eletricidade 35 kWh/kWh;\\água 25--60 L/kWh;\\N\textsubscript{2} e Ar};
+\node[ext] (Eforn) at (\XL,\YD) {Fornecedores de materiais\\e embalagens\\
+  (materiais 6,66;\\NMP 0,017)};
+\node[alt] (Ralt)  at (\XL,\YE) {\textbf{Alternativa:} síntese\\de LiFePO\textsubscript{4}
+  na fábrica\\(fronteira expandida)};
+
+% ----------------------------------------------------------------
+% OPERAÇÕES ANTERIORES À MISTURA (fluxo de baixo para cima)
+% ----------------------------------------------------------------
+\node[sup] (R4) at (\XR,\YA) {\textbf{Preparação, pesagem}\\\textbf{e dosagem}\\
+  solução de PVDF em NMP};
+\node[sup] (R3) at (\XR,\YB) {\textbf{Quarentena e}\\\textbf{armazenagem controlada}\\
+  pós em ambiente seco;\\inflamáveis em área própria};
+\node[sup] (R2) at (\XR,\YC) {\textbf{Inspeção de recebimento}\\\textbf{e laboratório de CQ}};
+\node[sup] (R1) at (\XR,\YD) {\textbf{Recebimento e descarga}};
+
+% ----------------------------------------------------------------
+% ETAPAS DE FABRICAÇÃO (balanço quantificado; numeração da Tabela de etapas)
+% ----------------------------------------------------------------
+\node[proc] (P1) at (\XP,\YA) {\textbf{1. Mistura}\\pastas catódica e anódica};
+\node[proc] (P2) at (\XP,\YB) {\textbf{2. Revestimento,}\\\textbf{secagem e calandragem}\\
+  secagem a 80--160\,°C};
+\node[proc] (P3) at (\XP,\YC) {\textbf{3. Corte e montagem}\\empilhamento e inserção no\\
+  invólucro (sala seca)};
+\node[proc] (P4) at (\XP,\YD) {\textbf{4. Enchimento e selagem}\\injeção a vácuo};
+\node[proc] (P5) at (\XP,\YE) {\textbf{5. Formação, degasagem}\\\textbf{e envelhecimento}};
+\node[proc] (P6) at (\XP,\YF) {\textbf{6. Teste e classificação}};
+
+% ----------------------------------------------------------------
+% EXAUSTÃO E RECUPERAÇÃO DE NMP
+% ----------------------------------------------------------------
+\node[loopn] (LN) at (\XN,\YA) {\textbf{Exaustão e}\\\textbf{recuperação de NMP}\\
+  (fornos de secagem)};
+
+% ----------------------------------------------------------------
+% OPERAÇÕES POSTERIORES AO TESTE (fluxo de baixo para cima)
+% ----------------------------------------------------------------
+\node[sup] (D6) at (\XD,\YB) {\textbf{Movimentação}\\\textbf{e expedição}};
+\node[sup] (D5) at (\XD,\YC) {\textbf{Armazenagem de}\\\textbf{células acabadas}};
+\node[sup] (D4) at (\XD,\YD) {\textbf{Ajuste do estado de}\\\textbf{carga e embalagem}};
+\node[sup] (D3) at (\XD,\YE) {\textbf{Identificação e}\\\textbf{rastreabilidade}};
+\node[sup] (D1) at (\XD,\YF) {\textbf{Segregação}\\aprovadas / reprovadas};
+\node[sup] (D2) at (\XD,\YG) {\textbf{Reteste e decisão}\\\textbf{de destino}};
+
+% ----------------------------------------------------------------
+% TRATAMENTO DE GASES, EFLUENTES E REFUGOS
+% ----------------------------------------------------------------
+\node[trat] (TG) at (\XT,\YA) {\textbf{Tratamento de gases}\\oxidação térmica ou\\
+  carvão ativado};
+\node[trat] (TE) at (\XT,\YC) {\textbf{Estação de tratamento}\\\textbf{de efluentes}};
+\node[trat] (TS) at (\XT,\YF) {\textbf{Armazenagem segregada}\\\textbf{de sucata, rejeitos e}\\
+  \textbf{resíduos perigosos}};
+
+% ----------------------------------------------------------------
+% EXTERNOS À DIREITA
+% ----------------------------------------------------------------
+\node[ext] (Eatm) at (\XE,\YA) {Atmosfera};
+\node[ext] (Ecli) at (\XE,\YB) {Clientes: montagem de\\módulos e \textit{packs}};
+\node[ext] (Ecor) at (\XE,\YC) {Corpo receptor ou\\rede coletora};
+\node[ext] (Erec) at (\XE,\YE) {Recicladores externos};
+\node[ext] (Esuc) at (\XE,\YF) {Sucateiros (Cu e Al)};
+\node[ext] (Edes) at (\XE,\YG) {Destinador licenciado de\\resíduos perigosos};
+
+% ----------------------------------------------------------------
+% FRONTEIRA E GRUPOS
+% ----------------------------------------------------------------
+\begin{scope}[on background layer]
+\draw[black, line width=1.6pt, dash pattern=on 9pt off 4pt, rounded corners=6pt]
+      (2.95,2.75) rectangle (23.75,-13.1);
+\node[draw=black!25, rounded corners=4pt, fill=gray!4, inner sep=5pt, fit=(R4)(R1),
+      label={[lblg]south:Antes da mistura}] {};
+\node[draw=black!25, rounded corners=4pt, fill=gray!4, inner sep=5pt, fit=(P1)(P6),
+      label={[lblg]south:Fabricação (balanço quantificado)}] {};
+\node[draw=black!25, rounded corners=4pt, fill=gray!4, inner sep=5pt, fit=(D6)(D2),
+      label={[lblg]south:Depois do teste}] {};
+\end{scope}
+\node[anchor=south west, font=\scriptsize\bfseries, inner sep=3pt] at (2.95,-13.1)
+      {Fronteira da fábrica (\textit{gate-to-gate})};
+
+% ----------------------------------------------------------------
+% COORDENADAS AUXILIARES
+% ----------------------------------------------------------------
+\coordinate (cDU) at ({\XD+0.6},0);   % utilidades para as operações posteriores
+\coordinate (cPU) at (19.2,0);         % purgas para a estação de efluentes
+
+% ----------------------------------------------------------------
+% UTILIDADES E ENERGIA (desenhadas primeiro; os demais fluxos as cruzam por cima)
+% ----------------------------------------------------------------
+\draw[uti] (Eutil.east) -- (U.west);
+\draw[uti] (U.south -| R4) -- node[lbl, right=1pt] {n.q.} (R4.north);
+\draw[uti] (U.south -| P1) -- node[lbl, left=1pt] {água DI 1,39;\\energia} (P1.north);
+\draw[uti] (U.south -| cDU) -- node[lbl, left=1pt, pos=0.35] {n.q.} (cDU |- D6.north);
+\draw[uti] (U.south -| cPU) |- (TE.west);
+\node[lbl, anchor=east] at (19.1,0.45) {purgas e\\rejeitos de água};
+\draw[uti] (U.east) -| node[lbl, pos=0.25, above=1pt] {calor $\geq$34 kWh/kWh} (Eatm.north);
+
+% ----------------------------------------------------------------
+% REFUGOS, REJEITOS E RETORNOS
+% ----------------------------------------------------------------
+% barramento de refugos de fabricação até a armazenagem segregada
+\draw[sec] ([yshift=-3mm]P1.east) -- (\XB,{\YA-0.3}) -- (\XB,\YR) -- (22.2,\YR)
+           -- ([xshift=4mm]TS.south);
+\draw[sec] ([yshift=-3.5mm]P2.east) -- (\XB,{\YB-0.35});
+\draw[sec] ([yshift=-3mm]P3.east) -- (\XB,{\YC-0.3});
+\node[lbl, anchor=west] at ({\XB+0.07},{\YA-0.3}) {0,021};
+\node[lbl, anchor=north west] at ({\XB+0.07},{\YB-0.42}) {0,094};
+\node[lbl, anchor=west] at ({\XB+0.07},{\YC-0.3}) {0,093};
+\node[lbl, anchor=north] at (17.45,{\YR-0.07}) {refugo de fabricação 0,21 = pasta
+  descartada 0,021 + eletrodo revestido 0,094 + aparas 0,093};
+% células reprovadas
+\draw[sec] ([xshift=-3mm]D1.south) -- node[lbl, left=1pt] {reprovadas\\0,19}
+           ([xshift=-3mm]D2.north);
+\draw[sec] ([xshift=3mm]D2.north) -- node[lbl, right=1pt] {recuperadas\\(n.q.)}
+           ([xshift=3mm]D1.south);
+\draw[sec] (D2.east) -- node[lbl, above=1pt] {não\\recuperáveis} (21.4,\YG)
+           -- ([xshift=-4mm]TS.south);
+% destinação externa
+\draw[sec] ([xshift=9mm]TS.north) |- node[lbl, pos=0.82, above=1pt] {0,35} (Erec.west);
+\draw[sec] (TS.east) -- node[lbl, pos=0.68, above=1pt] {0,03} (Esuc.west);
+\draw[sec] ([xshift=9mm]TS.south) |- node[lbl, pos=0.82, above=1pt] {0,021} (Edes.west);
+% devolução ao fornecedor
+\draw[sec] (R2.west) -| ([xshift=9mm]Eforn.north);
+\node[lbl, anchor=south east] at (2.85,{\YC+0.05}) {lotes não conformes\\e embalagens\\
+  retornáveis (n.q.)};
+
+% ----------------------------------------------------------------
+% ALTERNATIVA CONDICIONADA (planta integrada)
+% ----------------------------------------------------------------
+\draw[sec, dashed] (Eforn.south) -- node[lbl, left=1pt]
+      {FePO\textsubscript{4},\\Li\textsubscript{2}CO\textsubscript{3}} (Ralt.north);
+\draw[sec, dashed] (Ralt.east) -- (2.6,\YE) |- node[lbl, pos=0.25, left=1pt]
+      {LiFePO\textsubscript{4}} ([yshift=-3mm]R1.west);
+
+% ----------------------------------------------------------------
+% FLUXO PRINCIPAL DE MATERIAIS
+% ----------------------------------------------------------------
+\draw[mat] (Eforn.east) -- (R1.west);
+\draw[mat] (R1) -- (R2);
+\draw[mat] (R2) -- (R3);
+\draw[mat] (R3) -- (R4);
+\draw[mat] (R4.east) -- node[lbl, above=1pt] {sólidos 3,79;\\NMP 0,017} (P1.west);
+% abastecimento direto a partir da armazenagem
+\draw[mat] (R3.east) -- node[lbl, above=1pt, pos=0.62] {folhas de\\Cu e Al 0,94} (P2.west);
+\draw[mat] (\XS,\YB) |- node[lbl, above=1pt, pos=0.75] {separador,\\invólucro e\\
+  diversos 1,04} (P3.west);
+\draw[mat] (\XS,\YC) |- node[lbl, above=1pt, pos=0.75] {eletrólito 0,89} (P4.west);
+% etapas de fabricação
+\draw[mat] (P1) -- node[lbl, right=2pt] {3,78} (P2);
+\draw[mat] (P2) -- node[lbl, right=2pt] {4,62} (P3);
+\draw[mat] (P3) -- node[lbl, right=2pt] {5,57} (P4);
+\draw[mat] (P4) -- node[lbl, right=2pt] {6,46} (P5);
+\draw[mat] (P5) -- node[lbl, right=2pt] {6,44} (P6);
+\draw[mat, halo] (P6.east) -- node[lbl, above=1pt, pos=0.6] {6,44} (D1.west);
+% operações posteriores
+\draw[mat] (D1) -- node[lbl, right=2pt] {aprovadas 6,25} (D3);
+\draw[mat] (D3) -- (D4);
+\draw[mat] (D4) -- (D5);
+\draw[mat] (D5) -- (D6);
+\draw[mat, halo] (D6.east) -- node[lbl, above=1pt, pos=0.5]
+      {células 6,25 +\\embalagem (n.q.)} (Ecli.west);
+
+% ----------------------------------------------------------------
+% CIRCUITOS INTERNOS
+% ----------------------------------------------------------------
+\draw[cir] ([xshift=-8mm]P1.south) -- ++(0,-0.35) -| node[lbl, pos=0.25, below=1pt]
+      {pasta 0,027} ([xshift=-14mm]P1.south);
+\draw[cir, halo] ([yshift=3mm]P2.east) -| ([xshift=-10.5mm]LN.south);
+\draw[cir] ([yshift=2.5mm]LN.west) -- node[lbl, above=1pt] {NMP 1,69}
+      ([yshift=2.5mm]P1.east);
+\draw[cir] ([yshift=2.5mm]P5.west) -- ++(-0.35,0) |- (P5.west);
+\node[lbl, anchor=east] at ({\XP-2.25},{\YE+0.2}) {energia da descarga\\
+  1--3 kWh/kWh (rede interna)};
+
+% ----------------------------------------------------------------
+% EMISSÕES E EFLUENTES
+% ----------------------------------------------------------------
+\draw[emi, halo] ([yshift=0.5mm]P2.east) -| ([xshift=-7.5mm]LN.south);
+\node[lbl, anchor=west] at (14.65,-1.5) {NMP 1,70;\\vapor 1,38};
+\draw[emi, halo] (LN.east) -- node[lbl, above=1pt, pos=0.5] {vapor 1,38;\\NMP 0,012}
+      (TG.west);
+\node[conn] (G1) at (8.25,{\YD-0.4}) {G};
+\node[conn] (G2) at (8.25,{\YE-0.4}) {G};
+\draw[emi] ([yshift=-4mm]P4.west) -- (G1.east);
+\draw[emi] ([yshift=-4mm]P5.west) -- (G2.east);
+\node[lbl, anchor=north] at (8.25,{\YD-0.6}) {evaporação de\\eletrólito 0,005};
+\node[lbl, anchor=north] at (8.25,{\YE-0.6}) {gases de\\formação 0,013};
+\node[conn] (G3) at (20.5,0.65) {G};
+\draw[emi] (G3) -| ([xshift=-8mm]TG.north);
+\draw[emi, halo] (TG.east) -- node[lbl, above=1pt, pos=0.55]
+      {VOC $\approx$17 g/kWh;\\gases tratados} (Eatm.west);
+\draw[emi] (TE.east) -- node[lbl, above=1pt, pos=0.62] {15--40 L/kWh} (Ecor.west);
+
+% ----------------------------------------------------------------
+% LEGENDA
+% ----------------------------------------------------------------
+\node[anchor=north west, draw=black!40, rounded corners=3pt, fill=white,
+      inner sep=4pt, align=left, font=\fontsize{7}{8}\selectfont]
+      at (-2.15,-8.6) {%
+\begin{tabular}{@{}l@{\hspace{4pt}}l@{}}
+\tikz[baseline=-0.6ex]\draw[mat] (0,0) -- (0.9,0); & Fluxo principal de materiais \\[1pt]
+\tikz[baseline=-0.6ex]\draw[sec] (0,0) -- (0.9,0); & Refugos, rejeitos e retornos \\[1pt]
+\tikz[baseline=-0.6ex]\draw[uti] (0,0) -- (0.9,0); & Utilidades e energia \\[1pt]
+\tikz[baseline=-0.6ex]\draw[cir] (0,0) -- (0.9,0); & Circuito interno \\[1pt]
+\tikz[baseline=-0.6ex]\draw[emi] (0,0) -- (0.9,0); & Emissões e efluentes \\[2pt]
+\tikz[baseline=-0.6ex]\draw[thick, draw=black!75, fill=gray!20, rounded corners=1.5pt]
+  (0.08,-0.14) rectangle (0.82,0.14); & Etapa quantificada \\[1pt]
+\tikz[baseline=-0.6ex]\draw[thick, draw=black!75, fill=white, rounded corners=1.5pt]
+  (0.08,-0.14) rectangle (0.82,0.14); & Operação de suporte \\[1pt]
+\tikz[baseline=-0.6ex]\draw[thick, draw=black!65, dashed, fill=white, rounded corners=1.5pt]
+  (0.08,-0.14) rectangle (0.82,0.14); & Alternativa condicionada \\[1pt]
+\tikz[baseline=-0.6ex]\draw[draw=black!75, double, fill=gray!6]
+  (0.04,-0.14) -- (0.86,-0.14) -- (0.74,0.14) -- (0.16,0.14) -- cycle; & Interface externa \\[1pt]
+\tikz[baseline=-0.6ex]\node[conn, anchor=center] at (0.45,0) {G}; & Conector de gases \\[1pt]
+\tikz[baseline=-0.6ex]\draw[line width=1.2pt, dash pattern=on 6pt off 3pt] (0,0) -- (0.9,0);
+  & Fronteira da fábrica \\
+\end{tabular}\\[2pt]
+Valores em kg/kWh de célula aprovada,\\salvo indicação; n.q.: não quantificado.};
+
+\end{tikzpicture}
