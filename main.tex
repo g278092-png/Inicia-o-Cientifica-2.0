@@ -34,7 +34,8 @@
 \usepackage{graphicx}
 \usepackage{float}           % permite [H]
 \usepackage{tikz}
-\usetikzlibrary{positioning, arrows.meta, fit, backgrounds}
+\usetikzlibrary{positioning, arrows.meta, fit, backgrounds,
+                shapes.geometric, calc, patterns}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage{caption}
@@ -46,11 +47,12 @@
 \definecolor{corOutros}{HTML}{A6A6A6}
 \definecolor{corLinha}{HTML}{444444}
 
-% Cores usadas no capítulo da gigafábrica
+% Cores usadas no capítulo da fábrica
 \definecolor{gigaAzul}{HTML}{2563EB}
 \definecolor{gigaLaranja}{HTML}{D97706}
 \definecolor{gigaVerde}{HTML}{16A34A}
 \definecolor{gigaRoxo}{HTML}{7C3AED}
+\definecolor{gigaCinza}{HTML}{6B7280}
 
 % ============================================================
 %  TEXTO, LAYOUT E DIVERSOS
@@ -61,7 +63,8 @@
 \usepackage{wrapfig}
 \usepackage{indentfirst}
 \usepackage{changepage}
-\usepackage{lscape}
+\usepackage{pdflscape}       % páginas em paisagem (Figura 9)
+\usepackage{afterpage}       % insere a página em paisagem na próxima quebra
 \usepackage{scalefnt}
 \usepackage{soul}
 \usepackage{ragged2e}
@@ -71,29 +74,17 @@
 \usepackage{courier}
 
 % ============================================================
-%  CÓDIGO MATLAB
+%  HYPERREF
 % ============================================================
-\usepackage{listings}
-\usepackage[numbered,framed]{matlab-prettifier}
-\lstset{
-  style              = Matlab-editor,
-  basicstyle         = \mlttfamily\small,
-  escapechar         = ",
-  mlshowsectionrules = true,
-}
-
-% ============================================================
-%  CITAÇÕES E REFERÊNCIAS
-% ============================================================
-\usepackage[round,authoryear]{natbib}
-
-% ============================================================
-%  HYPERREF (deve vir por último entre os pacotes principais)
-% ============================================================
+\usepackage{xurl}            % quebra de URLs longas nas referências
 \usepackage[pdfusetitle,bookmarks=true,bookmarksopen=true,
             colorlinks=false,hidelinks]{hyperref}
 
-\usepackage{lipsum}
+% ============================================================
+%  CITAÇÕES E REFERÊNCIAS (ABNT, sistema autor-data)
+%  O abntex2cite deve ser carregado depois do hyperref.
+% ============================================================
+\usepackage[alf]{abntex2cite}
 
 % ============================================================
 %  CABEÇALHO E RODAPÉ
@@ -102,10 +93,14 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\includegraphics[height=1cm]{Logo/logo_unicamp.png}}
-\fancyhead[C]{\small EM506 A - Mecanismos e Dinâmica das Máquinas}
+\fancyhead[C]{\small Relatório Final de Iniciação Científica}
 \fancyhead[R]{\includegraphics[height=1cm]{Logo/Logo_FEM.png}}
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyfoot[C]{\thepage}
+\fancypagestyle{paisagem}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\thepage}}
 
 % Nomenclatura em português
 \addto\captionsbrazilian{\renewcommand{\tablename}{Tabela}}
@@ -119,9 +114,18 @@
 \setlength{\tabcolsep}{6pt}
 \setlength{\LTpre}{6pt}
 \setlength{\LTpost}{12pt}
+\setlength{\emergencystretch}{2em}  % reduz linhas que ultrapassam a margem
 
 % ---------- Macro para fonte de tabelas/figuras ----------
 \newcommand{\fonte}[1]{\par\vspace{3pt}{\footnotesize Fonte: #1}}
+
+% ---------- Pendências de verificação (remover antes da entrega) ----------
+% Marca, em vermelho no PDF, cada informação que depende de dado ou fonte
+% ainda não confirmados. Para localizar todas: buscar "\pendente" no projeto.
+\newcommand{\pendente}[1]{\textcolor{red}{[Pendente: #1]}}
+
+% ---------- "Sem data" nas referências ABNT ----------
+\DeclareRobustCommand{\sd}{[s.d.]}
 
 % ============================================================
 \begin{document}
@@ -137,7 +141,6 @@
 \input{chapters/4.Resultados}
 \input{chapters/5.MFA_Gigafabrica}
 \input{chapters/6.Conclusao}
-\input{chapters/7.Anexos}
 \input{chapters/8.Referencias}
 
 \end{document}
